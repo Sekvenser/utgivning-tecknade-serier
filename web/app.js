@@ -1,9 +1,19 @@
 const app = document.getElementById("app");
 const searchInput = document.getElementById("search");
+const yearFilter = document.getElementById("year-filter");
+const DEFAULT_YEAR = "2026";
 let books = [];
 
+function populateYearFilter() {
+  const years = [...new Set(books.map((b) => b.year).filter(Boolean))].sort((a, b) => b - a);
+  const options = [`<option value="all">Alla</option>`]
+    .concat(years.map((y) => `<option value="${y}">${y}</option>`));
+  yearFilter.innerHTML = options.join("");
+  yearFilter.value = years.includes(Number(DEFAULT_YEAR)) ? DEFAULT_YEAR : "all";
+}
+
 function escapeHtml(s) {
-  return (s || "").replace(/[&<>"']/g, (c) => ({
+  return String(s ?? "").replace(/[&<>"']/g, (c) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
 }
@@ -18,8 +28,10 @@ function coverSrc(coverUrl) {
 
 function renderList() {
   const query = searchInput.value.trim().toLocaleLowerCase("sv-SE");
+  const year = yearFilter.value;
   const visible = books
     .filter((b) => !b.hidden)
+    .filter((b) => year === "all" || b.year === Number(year))
     .filter((b) => {
       if (!query) return true;
       const haystack = (b.title + " " + (b.authors || []).join(" ")).toLocaleLowerCase("sv-SE");
@@ -93,15 +105,18 @@ function route() {
 }
 
 window.addEventListener("hashchange", route);
-searchInput.addEventListener("input", () => {
+function backToListThenRoute() {
   if (location.hash.startsWith("#/book/")) location.hash = "#/";
   else route();
-});
+}
+searchInput.addEventListener("input", backToListThenRoute);
+yearFilter.addEventListener("change", backToListThenRoute);
 
 fetch("../data/books.json")
   .then((r) => r.json())
   .then((data) => {
     books = data;
+    populateYearFilter();
     route();
   })
   .catch((err) => {

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""CLI to build/update the index of Swedish comics & graphic novels published since 2024.
+"""CLI to build/update the index of Swedish comics & graphic novels published since 2020.
 
 Sources:
   - Libris (libris.kb.se xsearch API) - authoritative catalog of published books.
-    Query: SAB class Hci (tecknade serier) in Swedish, published from 2024 onward.
+    Query: SAB class Hci (tecknade serier) in Swedish, published from START_YEAR onward.
   - GrandOcean "På gång" shop category - upcoming/small-press titles, often ahead
     of Libris cataloguing. Gives cover image + full description text.
 
@@ -27,6 +27,7 @@ import urllib.parse
 import urllib.request
 
 DATA_PATH = "data/books.json"
+START_YEAR = 2020
 USER_AGENT = "Mozilla/5.0 (compatible; tecknade-serier-index/1.0)"
 GRANDOCEAN_CATEGORY_ID = 21  # "På gång"
 # image.bokus.com serves this exact image for any isbn/size it has no cover for.
@@ -103,31 +104,43 @@ def extract_year(*values):
 # Libris
 # ---------------------------------------------------------------------------
 
+# "Hci" is the legacy SAB code for comics; "He.05" is the equivalent in the
+# newer kssb (SAB 8th ed.) scheme used for more recently catalogued records.
+# Neither "språk:swe" nor "land:sw" alone is complete (e.g. a book cataloguers
+# marked Swedish-published but English-language, or vice versa), so every
+# combination is queried and the results are deduplicated by identifier.
+LIBRIS_CLASSIFICATIONS = ["Hci", "He.05"]
+LIBRIS_SWEDISH_FILTERS = ["språk:swe", "land:sw"]
+
+
 def fetch_libris(year_from, year_to):
-    records = []
-    start = 1
-    query = f"SAB:Hci år:{year_from}-{year_to} språk:swe"
-    while True:
-        body = http_get(
-            "https://libris.kb.se/xsearch",
-            {"query": query, "format": "json", "n": 200, "start": start},
-        )
-        data = json.loads(body)["xsearch"]
-        items = data["list"]
-        if not items:
-            break
-        for item in items:
-            records.append(normalize_libris(item))
-        if data["to"] >= data["records"]:
-            break
-        start = data["to"] + 1
+    items_by_id = {}
+    for classification in LIBRIS_CLASSIFICATIONS:
+        for swedish_filter in LIBRIS_SWEDISH_FILTERS:
+            query = f"SAB:{classification} år:{year_from}-{year_to} {swedish_filter}"
+            start = 1
+            while True:
+                body = http_get(
+                    "https://libris.kb.se/xsearch",
+                    {"query": query, "format": "json", "n": 200, "start": start},
+                )
+                data = json.loads(body)["xsearch"]
+                items = data["list"]
+                if not items:
+                    break
+                for item in items:
+                    items_by_id[item["identifier"]] = item
+                if data["to"] >= data["records"]:
+                    break
+                start = data["to"] + 1
+    records = [normalize_libris(item) for item in items_by_id.values()]
     return [r for r in records if r]
 
 
 def normalize_libris(item):
     isbn = re.sub(r"[^0-9Xx]", "", first(item.get("isbn", "")))
     year = extract_year(item.get("date"))
-    if year is not None and year < 2024:
+    if year is not None and year < START_YEAR:
         return None
     creator = first(item.get("creator"))
     authors = [a.strip() for a in re.split(r"\s*/\s*", creator) if a.strip()]
@@ -140,7 +153,7 @@ def normalize_libris(item):
         "publisher": publisher.strip(),
         "year": year,
         "published": first(item.get("date")) or "",
-        "language": item.get("language", ""),
+        "language": ", ".join(item["language"]) if isinstance(item.get("language"), list) else item.get("language", ""),
         "description": "",
         "cover_url": "",
         "source_url": item.get("identifier", ""),
@@ -327,7 +340,7 @@ def cmd_update(args):
     store = load_store(args.data)
 
     print("Fetching Libris...", file=sys.stderr)
-    libris_records = fetch_libris(2024, current_year)
+    libris_records = fetch_libris(START_YEAR, current_year)
     print(f"  {len(libris_records)} records", file=sys.stderr)
     merge(store, libris_records)
 

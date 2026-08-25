@@ -1,6 +1,6 @@
-# Tecknade serier sedan 2024
+# Tecknade serier sedan 2020
 
-Index of Swedish comics & graphic novels published since 2024.
+Index of Swedish comics & graphic novels published since 2020.
 
 ## Update the index
 
@@ -9,7 +9,7 @@ python3 cli.py update
 ```
 
 Fetches from:
-- **Libris** (`libris.kb.se` xsearch API) — SAB class `Hci` (tecknade serier), Swedish, 2024–present. This is the backbone: any comic catalogued by the Swedish national library.
+- **Libris** (`libris.kb.se` xsearch API) — comics classified `Hci` (legacy SAB) or `He.05` (newer kssb scheme), published in Sweden (by country *or* language, since neither field alone is reliably filled in), 2020–present. This is the backbone: any comic catalogued by the Swedish national library, including English-language books from Swedish publishers.
 - **GrandOcean** "På gång" shop category — upcoming/small-press titles, often ahead of Libris. Also a source of cover images and full description text.
 - **Bokus**' image CDN (`image.bokus.com`) — used as a fallback cover source, keyed by ISBN, for any book GrandOcean doesn't stock. The main Bokus site (`www.bokus.com`) sits behind a Vercel bot-protection checkpoint and can't be scraped for text/listings, so each book also gets a generated "Sök på Bokus" search link instead of a direct product link.
 
