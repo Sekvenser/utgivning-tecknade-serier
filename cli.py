@@ -429,6 +429,7 @@ def fetch_amazon_publication_date(page, isbn):
 BOOK_FIELD_ORDER = [
     "id", "isbn", "title", "authors", "publisher", "year", "published", "published_date",
     "language", "description", "cover_url", "source_url", "bokus_search_url",
+    "more_info_url", "buy_url",  # optional, hand-curated -- not filled in by any scraper
     "sources", "grandocean_id", "hidden", "added_at",
 ]
 

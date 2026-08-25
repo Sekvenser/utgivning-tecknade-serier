@@ -17,5 +17,5 @@ bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&se
 sources:
 - grandocean
 grandocean_id: 12164
-hidden: false
+hidden: true
 added_at: '2026-08-25T15:00:24+00:00'

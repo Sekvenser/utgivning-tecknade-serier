@@ -84,6 +84,8 @@ function renderDetail(id) {
   }
 
   const links = [];
+  if (b.more_info_url) links.push(`<a href="${escapeHtml(b.more_info_url)}" target="_blank" rel="noopener">Mer information</a>`);
+  if (b.buy_url) links.push(`<a href="${escapeHtml(b.buy_url)}" target="_blank" rel="noopener">Köp</a>`);
   if (b.source_url) links.push(`<a href="${escapeHtml(b.source_url)}" target="_blank" rel="noopener">Källa (${escapeHtml((b.sources || []).map(sourceLabel).join(", "))})</a>`);
   if (b.bokus_search_url) links.push(`<a href="${escapeHtml(b.bokus_search_url)}" target="_blank" rel="noopener">Sök på Bokus</a>`);
 
