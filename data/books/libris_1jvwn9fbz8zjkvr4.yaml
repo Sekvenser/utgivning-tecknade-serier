@@ -13,5 +13,5 @@ source_url: http://libris.kb.se/bib/1jvwn9fbz8zjkvr4
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Charlie%20and%20the%20golden%20mask
 sources:
 - libris
-hidden: false
+hidden: true
 added_at: '2026-08-24T14:44:26+00:00'
