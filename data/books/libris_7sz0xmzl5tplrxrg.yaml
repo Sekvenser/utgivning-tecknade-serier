@@ -14,5 +14,5 @@ source_url: http://libris.kb.se/bib/7sz0xmzl5tplrxrg
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=The%20wild%20robot
 sources:
 - libris
-hidden: false
+hidden: true
 added_at: '2026-08-24T14:44:26+00:00'

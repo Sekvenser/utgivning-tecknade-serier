@@ -16,5 +16,5 @@ source_url: http://libris.kb.se/bib/k499xxxxh81xg0c6
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Grannar%20%C2%B7%20Mata%20f%C3%A5glar
 sources:
 - libris
-hidden: false
+hidden: true
 added_at: '2026-08-24T14:44:26+00:00'
