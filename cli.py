@@ -12,6 +12,13 @@ Bokus itself (www.bokus.com) sits behind a Vercel bot-protection checkpoint
 (image.bokus.com) is unprotected though, so it's used as a fallback cover
 source for books that GrandOcean doesn't stock. A "view on Bokus" search link
 is generated per ISBN regardless.
+
+Bokinfo (bokinfo.se) is the trade catalog most Swedish booksellers pull data
+from, but its full book-detail pages and API (/sv-SE/artiklar/*,
+/api/publications/*) require a professional bookseller/publisher/library
+login, so that data is off-limits here. Its cover image CDN
+(bokinfo.se/Images/Products/Medium/{isbn[:6]}/{isbn}.jpg) is public and
+ISBN-keyed though, so it's used as a second cover fallback.
 """
 import argparse
 import datetime
@@ -32,6 +39,9 @@ USER_AGENT = "Mozilla/5.0 (compatible; tecknade-serier-index/1.0)"
 GRANDOCEAN_CATEGORY_ID = 21  # "På gång"
 # image.bokus.com serves this exact image for any isbn/size it has no cover for.
 BOKUS_PLACEHOLDER_MD5 = "1de746945c6a95329b1bf40f9e2992be"
+# bokinfo.se serves this exact image when an isbn's cover folder exists but
+# the specific cover doesn't (a genuinely missing isbn just 404s, no download needed).
+BOKINFO_PLACEHOLDER_MD5 = "394710781c9de409c97dce605cfff5c9"
 
 
 def http_get(url, params=None):
@@ -75,6 +85,27 @@ def fetch_bokus_cover(isbn, covers_dir):
         return ""
     if hashlib.md5(data).hexdigest() == BOKUS_PLACEHOLDER_MD5:
         return ""  # Bokus has no cover for this isbn
+    os.makedirs(covers_dir, exist_ok=True)
+    with open(path, "wb") as f:
+        f.write(data)
+    return f"covers/{filename}"
+
+
+def fetch_bokinfo_cover(isbn, covers_dir):
+    filename = f"bokinfo_{isbn}.jpg"
+    path = os.path.join(covers_dir, filename)
+    if os.path.exists(path):
+        return f"covers/{filename}"
+    try:
+        data = http_get_bytes(f"https://www.bokinfo.se/Images/Products/Medium/{isbn[:6]}/{isbn}.jpg")
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            return ""  # no cover folder for this isbn at all
+        raise
+    except urllib.error.URLError:
+        return ""
+    if hashlib.md5(data).hexdigest() == BOKINFO_PLACEHOLDER_MD5:
+        return ""  # folder exists but no cover for this specific isbn
     os.makedirs(covers_dir, exist_ok=True)
     with open(path, "wb") as f:
         f.write(data)
@@ -159,6 +190,26 @@ def normalize_libris(item):
         "source_url": item.get("identifier", ""),
         "sources": ["libris"],
     }
+
+
+def fetch_libris_description(source_url):
+    """Libris' xsearch API has no description field, but its full catalogue
+    record (same identifier, fetched as JSON-LD) often does -- usually
+    republished from Bokinfo's trade data. Used to backfill books that
+    GrandOcean doesn't stock."""
+    req = urllib.request.Request(source_url, headers={"User-Agent": USER_AGENT, "Accept": "application/ld+json"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        data = json.loads(resp.read())
+    for node in data.get("@graph", []):
+        summary = node.get("summary")
+        if not summary:
+            continue
+        label = summary[0].get("label") if isinstance(summary, list) else summary.get("label")
+        if isinstance(label, list):
+            label = label[0] if label else None
+        if label:
+            return re.sub(r"\s*\[\w+\]\s*$", "", label).strip()
+    return ""
 
 
 # ---------------------------------------------------------------------------
@@ -280,6 +331,88 @@ def parse_grandocean_description(page_html):
 
 
 # ---------------------------------------------------------------------------
+# Amazon.se (exact publication dates)
+# ---------------------------------------------------------------------------
+#
+# None of our other sources expose a day-level publication date (Libris and
+# GrandOcean only ever give a year). Amazon.se product pages do, in a
+# "Produktinformation" bullet list, but the site sits behind an Akamai
+# JS challenge that a plain HTTP request can't get past (it silently returns
+# an interstitial page instead of a 403, so it's not obvious from a status
+# code alone). A real, JS-executing browser (Playwright + headless Chromium)
+# solves the challenge automatically, so that's what this uses -- see the
+# `fetch-dates` command, kept separate from `update` because it's an order
+# of magnitude slower and Amazon-specific.
+
+AMAZON_USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+AMAZON_MONTHS_SV = {
+    "januari": 1, "februari": 2, "mars": 3, "april": 4, "maj": 5, "juni": 6,
+    "juli": 7, "augusti": 8, "september": 9, "oktober": 10, "november": 11, "december": 12,
+}
+AMAZON_DETAIL_LIST_RE = re.compile(
+    r'<ul class="a-unordered-list a-nostyle a-vertical a-spacing-none detail-bullet-list">(.*?)</ul>', re.S)
+AMAZON_DETAIL_ITEM_RE = re.compile(
+    r'<li><span class="a-list-item">\s*<span class="a-text-bold">(.*?)</span>\s*<span>(.*?)</span>\s*</span></li>', re.S)
+
+
+def parse_swedish_date(text):
+    m = re.match(r"(\d{1,2})\s+([A-Za-zÅÄÖåäö]+)\s+(\d{4})", text.strip())
+    if not m:
+        return None
+    day, month_name, year = m.groups()
+    month = AMAZON_MONTHS_SV.get(month_name.lower())
+    if not month:
+        return None
+    return f"{year}-{month:02d}-{int(day):02d}"
+
+
+def parse_amazon_detail_bullets(detail_html):
+    list_match = AMAZON_DETAIL_LIST_RE.search(detail_html)
+    if not list_match:
+        return {}
+    fields = {}
+    for label_raw, value_raw in AMAZON_DETAIL_ITEM_RE.findall(list_match.group(1)):
+        label = re.sub(r"[‎‏:]|&rlm;|&lrm;", "", label_raw).strip().lower()
+        value = html.unescape(re.sub(r"<[^>]+>", "", value_raw)).strip()
+        if "utgivare" in label:
+            fields["publisher"] = value
+        elif "publiceringsdatum" in label:
+            fields["published_raw"] = value
+        elif "isbn-13" in label:
+            fields["isbn13"] = value
+    return fields
+
+
+def amazon_goto(page, url):
+    """Navigate and give an Akamai JS challenge (if served) time to resolve."""
+    page.goto(url, timeout=30000, wait_until="domcontentloaded")
+    page.wait_for_timeout(1200)
+    if "akam-logo" in page.content() or not page.title().strip():
+        page.wait_for_timeout(6000)
+    return page.content()
+
+
+def fetch_amazon_publication_date(page, isbn):
+    target_isbn13 = re.sub(r"[^0-9]", "", isbn)
+    search_html = amazon_goto(page, f"https://www.amazon.se/s?k={isbn}")
+
+    asins = []
+    for m in re.finditer(r'href="/[^"]*?/dp/([A-Z0-9]{10})[^"]*"', search_html):
+        if m.group(1) not in asins:
+            asins.append(m.group(1))
+        if len(asins) >= 3:  # bound the cost of a wrong/ambiguous search match
+            break
+
+    for asin in asins:
+        detail_html = amazon_goto(page, f"https://www.amazon.se/dp/{asin}/")
+        fields = parse_amazon_detail_bullets(detail_html)
+        if re.sub(r"[^0-9]", "", fields.get("isbn13", "")) == target_isbn13:
+            return parse_swedish_date(fields.get("published_raw", ""))
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Store
 # ---------------------------------------------------------------------------
 
@@ -298,7 +431,9 @@ def load_store(path):
 
 
 def save_store(path, store):
-    books = sorted(store.values(), key=lambda b: (b.get("year") or 0, b["title"]), reverse=True)
+    books = sorted(store.values(),
+                   key=lambda b: (b.get("year") or 0, b.get("published_date") or "", b["title"]),
+                   reverse=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(books, f, ensure_ascii=False, indent=2)
 
@@ -349,7 +484,18 @@ def cmd_update(args):
     print(f"  {len(go_records)} records", file=sys.stderr)
     merge(store, go_records)
 
-    print("Fetching Bokus covers for books without one yet...", file=sys.stderr)
+    print("Fetching Bokinfo covers for books without one yet...", file=sys.stderr)
+    needs_cover = [b for b in store.values() if b.get("isbn") and not b.get("cover_url")]
+    found = 0
+    for b in needs_cover:
+        cover = fetch_bokinfo_cover(b["isbn"], covers_dir)
+        if cover:
+            b["cover_url"] = cover
+            found += 1
+        time.sleep(0.1)  # be polite to the CDN
+    print(f"  found {found}/{len(needs_cover)} covers", file=sys.stderr)
+
+    print("Fetching Bokus covers for books still without one...", file=sys.stderr)
     needs_cover = [b for b in store.values() if b.get("isbn") and not b.get("cover_url")]
     found = 0
     for b in needs_cover:
@@ -360,13 +506,70 @@ def cmd_update(args):
         time.sleep(0.1)  # be polite to the CDN
     print(f"  found {found}/{len(needs_cover)} covers", file=sys.stderr)
 
+    print("Fetching Libris descriptions for books without one yet...", file=sys.stderr)
+    needs_description = [b for b in store.values() if "libris" in b.get("sources", []) and not b.get("description")]
+    found = 0
+    for b in needs_description:
+        try:
+            description = fetch_libris_description(b["source_url"])
+        except (urllib.error.URLError, json.JSONDecodeError) as exc:
+            print(f"warning: failed to fetch description for {b['id']}: {exc}", file=sys.stderr)
+            description = ""
+        if description:
+            b["description"] = description
+            found += 1
+        time.sleep(0.1)  # be polite to Libris
+    print(f"  found {found}/{len(needs_description)} descriptions", file=sys.stderr)
+
     save_store(args.data, store)
     print(f"Saved {len(store)} books to {args.data}", file=sys.stderr)
 
 
+def cmd_fetch_dates(args):
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("This command needs Playwright: pip install playwright && playwright install chromium",
+              file=sys.stderr)
+        sys.exit(1)
+
+    store = load_store(args.data)
+    needs_date = [b for b in store.values() if b.get("isbn") and not b.get("published_date")]
+    if args.limit:
+        needs_date = needs_date[:args.limit]
+    print(f"Fetching publication dates for {len(needs_date)} books from amazon.se "
+          f"(slow: ~5-10s/book)...", file=sys.stderr)
+
+    found = 0
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(user_agent=AMAZON_USER_AGENT, locale="sv-SE")
+        try:
+            for i, b in enumerate(needs_date, 1):
+                try:
+                    date_iso = fetch_amazon_publication_date(page, b["isbn"])
+                except Exception as exc:
+                    print(f"warning: failed on {b['isbn']} ({b['title']}): {exc}", file=sys.stderr)
+                    date_iso = None
+                if date_iso:
+                    b["published_date"] = date_iso
+                    found += 1
+                if i % 20 == 0:
+                    save_store(args.data, store)
+                    print(f"  {i}/{len(needs_date)} processed, {found} dates found so far", file=sys.stderr)
+                time.sleep(1.5)  # be polite / reduce block risk
+        finally:
+            browser.close()
+
+    save_store(args.data, store)
+    print(f"Done: found {found}/{len(needs_date)} publication dates", file=sys.stderr)
+
+
 def cmd_list(args):
     store = load_store(args.data)
-    books = sorted(store.values(), key=lambda b: (b.get("year") or 0, b["title"]), reverse=True)
+    books = sorted(store.values(),
+                   key=lambda b: (b.get("year") or 0, b.get("published_date") or "", b["title"]),
+                   reverse=True)
     for b in books:
         flag = "HIDDEN" if b.get("hidden") else "      "
         print(f"{flag}  {b.get('year') or '????'}  {b['id']:<16}  {b['title']} — {', '.join(b.get('authors') or [])}")
@@ -389,6 +592,10 @@ def main():
 
     sub.add_parser("update", help="fetch latest data from all sources and merge into the index")
 
+    p_dates = sub.add_parser("fetch-dates",
+        help="scrape exact publication dates from amazon.se (slow, needs playwright; run separately from update)")
+    p_dates.add_argument("--limit", type=int, default=None, help="max number of books to process this run")
+
     sub.add_parser("list", help="list all books in the index")
 
     p_hide = sub.add_parser("hide", help="hide a book from the UI")
@@ -400,6 +607,8 @@ def main():
     args = parser.parse_args()
     if args.command == "update":
         cmd_update(args)
+    elif args.command == "fetch-dates":
+        cmd_fetch_dates(args)
     elif args.command == "list":
         cmd_list(args)
     elif args.command == "hide":

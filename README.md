@@ -10,10 +10,22 @@ python3 cli.py update
 
 Fetches from:
 - **Libris** (`libris.kb.se` xsearch API) — comics classified `Hci` (legacy SAB) or `He.05` (newer kssb scheme), published in Sweden (by country *or* language, since neither field alone is reliably filled in), 2020–present. This is the backbone: any comic catalogued by the Swedish national library, including English-language books from Swedish publishers.
-- **GrandOcean** "På gång" shop category — upcoming/small-press titles, often ahead of Libris. Also a source of cover images and full description text.
-- **Bokus**' image CDN (`image.bokus.com`) — used as a fallback cover source, keyed by ISBN, for any book GrandOcean doesn't stock. The main Bokus site (`www.bokus.com`) sits behind a Vercel bot-protection checkpoint and can't be scraped for text/listings, so each book also gets a generated "Sök på Bokus" search link instead of a direct product link.
+- **GrandOcean** "På gång" shop category — upcoming/small-press titles, often ahead of Libris. Also the primary source of cover images and full description text.
+- **Libris' own catalogue record** (fetched as JSON-LD from the same identifier xsearch already gives us) — a fallback description source for anything GrandOcean doesn't stock. Many records carry a `summary` (often itself republished from Bokinfo's trade data), which xsearch's flatter API doesn't expose but the full record does.
+- **Bokinfo**'s image CDN (`bokinfo.se/Images/Products/Medium/{isbn[:6]}/{isbn}.jpg`) — used as a fallback cover source, keyed directly by ISBN, for any book GrandOcean doesn't stock. Bokinfo is the trade catalog most Swedish booksellers pull their data from, but its actual book-detail pages and API require a professional bookseller/publisher/library login, so only the (public, unauthenticated) cover images are used here.
+- **Bokus**' image CDN (`image.bokus.com`) — a second cover fallback, keyed by ISBN, for whatever Bokinfo doesn't have either. The main Bokus site (`www.bokus.com`) sits behind a Vercel bot-protection checkpoint and can't be scraped for text/listings, so each book also gets a generated "Sök på Bokus" search link instead of a direct product link.
 
 Re-running `update` merges new data in: existing `hidden` flags and any fields already filled in are kept, missing fields (e.g. a Libris-only book that GrandOcean also lists) get backfilled.
+
+## Fetching exact publication dates
+
+```
+pip install playwright && playwright install chromium
+python3 cli.py fetch-dates            # all books missing a date
+python3 cli.py fetch-dates --limit 50 # just the first 50 (for testing, or to run in smaller batches)
+```
+
+None of the sources above expose a day-level publication date — Libris and GrandOcean only ever give a year. Amazon.se product pages do, but the site sits behind an Akamai JS challenge that a plain HTTP request can't get past (Akademibokhandeln and Adlibris were also checked as candidates; both sit behind the same kind of bot-protection checkpoint as Bokus, with no public API either, so they weren't usable). A real headless browser (Playwright + Chromium) executes the challenge automatically, so `fetch-dates` uses that instead of a plain HTTP request. It's roughly 5-10s/book (search + product page + a polite delay) and matches results back to our record by comparing ISBN-13, so a run over the full catalog takes a couple of hours — it's a separate command from `update`, checkpoints its progress every 20 books, and safely skips books that already have a date, so it can be stopped and re-run at any time. Not every book is listed on Amazon.se, so not every book will get a date.
 
 ## Other commands
 
@@ -29,7 +41,7 @@ python3 cli.py unhide <id>
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000/web/ — a grid of covers sorted by year (newest first), with a search box, and a detail page per book (description, ISBN, author, publisher, links).
+Then open http://localhost:8000/web/ — a grid of covers sorted by publication date where known, otherwise by year (newest first), with a search box, a year filter, and a detail page per book (description, ISBN, author, publisher, exact publication date where known, links).
 
 ## Data
 
@@ -37,7 +49,7 @@ Everything lives in `data/books.json`, one JSON array — easy to inspect, diff,
 
 ## Known limitations
 
-- Sort/filter is by **year** only — none of the sources reliably expose a full publication date for these titles.
-- Covers come from GrandOcean where available, otherwise Bokus by ISBN; books with neither (no ISBN, or Bokus has no cover either — currently ~77 of 592) show a text placeholder instead.
+- Exact `published_date` is only as complete as the `fetch-dates` command has been run — most books show a year only until then, since no source has day-level dates by default. Amazon.se also just doesn't list every book, so some will never get one.
+- Covers come from GrandOcean where available, otherwise Bokinfo by ISBN, otherwise Bokus by ISBN; books with none of the three (no ISBN, or none of the sources has a cover — currently ~129 of 1687) show a text placeholder instead.
 - Cover files are named after the book id and never re-downloaded once present — delete a file under `data/covers/` to force a re-fetch on the next `update`.
-- Description text only exists for GrandOcean-sourced books.
+- Description text comes from GrandOcean where available, otherwise Libris' catalogue record; books with neither (currently ~444 of 1688) show no description.

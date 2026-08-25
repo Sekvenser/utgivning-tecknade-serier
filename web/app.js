@@ -22,6 +22,11 @@ function sourceLabel(id) {
   return { libris: "Libris", grandocean: "GrandOcean" }[id] || id;
 }
 
+function formatDate(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return d.toLocaleDateString("sv-SE", { year: "numeric", month: "long", day: "numeric" });
+}
+
 function coverSrc(coverUrl) {
   return coverUrl ? "../data/" + coverUrl : "";
 }
@@ -82,7 +87,7 @@ function renderDetail(id) {
           <dl>
             <dt>Upphovsperson</dt><dd>${escapeHtml((b.authors || []).join(", ") || "–")}</dd>
             <dt>Förlag</dt><dd>${escapeHtml(b.publisher || "–")}</dd>
-            <dt>Utgiven</dt><dd>${escapeHtml(b.published || String(b.year || "") || "–")}</dd>
+            <dt>Utgiven</dt><dd>${b.published_date ? escapeHtml(formatDate(b.published_date)) : escapeHtml(b.published || String(b.year || "") || "–")}</dd>
             <dt>ISBN</dt><dd>${escapeHtml(b.isbn || "–")}</dd>
             <dt>Språk</dt><dd>${escapeHtml(b.language || "–")}</dd>
           </dl>
