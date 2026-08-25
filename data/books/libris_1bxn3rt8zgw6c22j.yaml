@@ -13,5 +13,5 @@ source_url: http://libris.kb.se/bib/1bxn3rt8zgw6c22j
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Abominable
 sources:
 - libris
-hidden: false
+hidden: true
 added_at: '2026-08-24T14:44:26+00:00'

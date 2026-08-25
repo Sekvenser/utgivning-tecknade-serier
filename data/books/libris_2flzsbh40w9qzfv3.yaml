@@ -13,5 +13,5 @@ source_url: http://libris.kb.se/bib/2flzsbh40w9qzfv3
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Trolls%20World%20Tour%20%3A%20dance%20party%20edition
 sources:
 - libris
-hidden: false
+hidden: true
 added_at: '2026-08-24T14:44:26+00:00'
