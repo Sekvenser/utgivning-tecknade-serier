@@ -10,7 +10,7 @@ python3 cli.py update
 
 Fetches from:
 - **Libris** (`libris.kb.se` xsearch API) — comics classified `Hci` (legacy SAB) or `He.05` (newer kssb scheme), published in Sweden (by country *or* language, since neither field alone is reliably filled in), 2020–present. This is the backbone: any comic catalogued by the Swedish national library, including English-language books from Swedish publishers.
-- **GrandOcean** "På gång" shop category — upcoming/small-press titles, often ahead of Libris. Also the primary source of cover images and full description text.
+- **GrandOcean**'s "På gång" (upcoming/pre-order) and "Nyutkommet" (newly released) shop categories — small-press titles, often ahead of Libris. Also the primary source of cover images and full description text.
 - **Libris' own catalogue record** (fetched as JSON-LD from the same identifier xsearch already gives us) — a fallback description source for anything GrandOcean doesn't stock. Many records carry a `summary` (often itself republished from Bokinfo's trade data), which xsearch's flatter API doesn't expose but the full record does.
 - **Bokinfo**'s image CDN (`bokinfo.se/Images/Products/Medium/{isbn[:6]}/{isbn}.jpg`) — used as a fallback cover source, keyed directly by ISBN, for any book GrandOcean doesn't stock. Bokinfo is the trade catalog most Swedish booksellers pull their data from, but its actual book-detail pages and API require a professional bookseller/publisher/library login, so only the (public, unauthenticated) cover images are used here.
 - **Bokus**' image CDN (`image.bokus.com`) — a second cover fallback, keyed by ISBN, for whatever Bokinfo doesn't have either. The main Bokus site (`www.bokus.com`) sits behind a Vercel bot-protection checkpoint and can't be scraped for text/listings, so each book also gets a generated "Sök på Bokus" search link instead of a direct product link.
@@ -35,6 +35,16 @@ python3 cli.py hide <id>       # hide a book from the UI (id = isbn, or the id s
 python3 cli.py unhide <id>
 ```
 
+Books whose publisher mentions "MTM" (Myndigheten för tillgängliga medier, the Swedish agency for accessible/talking-book media) are hidden automatically when first added — they're accessible-media reissues, not original releases. `unhide` still works on them like any other book if you want one visible.
+
+## Building the display json
+
+```
+python3 cli.py build
+```
+
+The web UI doesn't read the yaml files directly — it fetches `data/books.json`, one flat json array compiled from them. Run `build` after any command that touches the yaml (`update`, `fetch-dates`, `hide`, `unhide`) and before viewing the UI or deploying. This is the command a CI job (e.g. a GitHub Action, on every push that changes `data/books/`) should run to regenerate the deployed json.
+
 ## View the UI
 
 ```
@@ -45,7 +55,11 @@ Then open http://localhost:8000/web/ — a grid of covers sorted by publication 
 
 ## Data
 
-Everything lives in `data/books.json`, one JSON array — easy to inspect, diff, or edit by hand if needed. Cover images are downloaded into `data/covers/` during `update` (skipped if already present) so the UI never depends on external image hosts.
+Each book is one file under `data/books/<id>.yaml` — the source of truth, meant to be committed to git. Editing, hiding, or updating one book touches only its own file, so a git diff shows exactly what changed instead of a rewrite of one giant array. `python3 cli.py build` compiles all of them into `data/books.json`, which is gitignored (a generated artifact, not source) and is what `web/app.js` actually fetches.
+
+Cover images are downloaded into `data/covers/` during `update` (skipped if already present) so the UI never depends on external image hosts.
+
+Requires `PyYAML` (`pip install -r requirements.txt`).
 
 ## Known limitations
 

@@ -1,0 +1,17 @@
+id: '9789188897244'
+isbn: '9789188897244'
+title: Bug · Bok 1
+authors:
+- Bilal, Enki, 1951-
+publisher: 'Trosa : Cobolt förlag'
+year: 2020
+published: '[2020]'
+language: swe
+description: ''
+cover_url: covers/9789188897244.jpg
+source_url: http://libris.kb.se/bib/v611pm56sxrjjtgm
+bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789188897244
+sources:
+- libris
+hidden: false
+added_at: '2026-08-24T14:44:26+00:00'

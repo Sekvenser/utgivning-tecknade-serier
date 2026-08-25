@@ -22,6 +22,17 @@ function sourceLabel(id) {
   return { libris: "Libris", grandocean: "GrandOcean" }[id] || id;
 }
 
+const LANGUAGE_LABELS = {
+  swe: "Svenska", eng: "Engelska", nor: "Norska", dan: "Danska", fin: "Finska",
+  dut: "Nederländska", fre: "Franska", ger: "Tyska", spa: "Spanska", ita: "Italienska",
+  cze: "Tjeckiska", ara: "Arabiska", sme: "Nordsamiska",
+};
+
+function formatLanguage(language) {
+  if (!language) return "";
+  return language.split(",").map((code) => LANGUAGE_LABELS[code.trim()] || code.trim()).join(", ");
+}
+
 function formatDate(iso) {
   const d = new Date(iso + "T00:00:00");
   return d.toLocaleDateString("sv-SE", { year: "numeric", month: "long", day: "numeric" });
@@ -65,9 +76,10 @@ function renderList() {
 }
 
 function renderDetail(id) {
+  const backHref = yearFilter.value === "all" ? "#/" : `#/${yearFilter.value}`;
   const b = books.find((x) => x.id === id);
   if (!b) {
-    app.innerHTML = `<a class="back" href="#/">&larr; Tillbaka</a><div class="empty">Boken hittades inte.</div>`;
+    app.innerHTML = `<a class="back" href="${backHref}">&larr; Tillbaka</a><div class="empty">Boken hittades inte.</div>`;
     return;
   }
 
@@ -76,7 +88,7 @@ function renderDetail(id) {
   if (b.bokus_search_url) links.push(`<a href="${escapeHtml(b.bokus_search_url)}" target="_blank" rel="noopener">Sök på Bokus</a>`);
 
   app.innerHTML = `
-    <a class="back" href="#/">&larr; Tillbaka</a>
+    <a class="back" href="${backHref}">&larr; Tillbaka</a>
     <div class="detail">
       <div class="detail-head">
         <div class="cover">${b.cover_url
@@ -89,7 +101,7 @@ function renderDetail(id) {
             <dt>Förlag</dt><dd>${escapeHtml(b.publisher || "–")}</dd>
             <dt>Utgiven</dt><dd>${b.published_date ? escapeHtml(formatDate(b.published_date)) : escapeHtml(b.published || String(b.year || "") || "–")}</dd>
             <dt>ISBN</dt><dd>${escapeHtml(b.isbn || "–")}</dd>
-            <dt>Språk</dt><dd>${escapeHtml(b.language || "–")}</dd>
+            <dt>Språk</dt><dd>${escapeHtml(formatLanguage(b.language) || "–")}</dd>
           </dl>
           <div class="links">${links.join(" ")}</div>
         </div>
@@ -102,20 +114,29 @@ function renderDetail(id) {
 function route() {
   const hash = location.hash || "#/";
   const bookMatch = hash.match(/^#\/book\/(.+)$/);
+  const yearMatch = hash.match(/^#\/(\d{4})$/);
   if (bookMatch) {
     renderDetail(decodeURIComponent(bookMatch[1]));
   } else {
+    if (yearMatch && [...yearFilter.options].some((o) => o.value === yearMatch[1])) {
+      yearFilter.value = yearMatch[1];
+    }
     renderList();
   }
 }
 
 window.addEventListener("hashchange", route);
 function backToListThenRoute() {
-  if (location.hash.startsWith("#/book/")) location.hash = "#/";
-  else route();
+  if (location.hash.startsWith("#/book/")) {
+    location.hash = yearFilter.value === "all" ? "#/" : `#/${yearFilter.value}`;
+  } else {
+    route();
+  }
 }
 searchInput.addEventListener("input", backToListThenRoute);
-yearFilter.addEventListener("change", backToListThenRoute);
+yearFilter.addEventListener("change", () => {
+  location.hash = yearFilter.value === "all" ? "#/" : `#/${yearFilter.value}`;
+});
 
 fetch("../data/books.json")
   .then((r) => r.json())

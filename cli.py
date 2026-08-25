@@ -33,10 +33,13 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-DATA_PATH = "data/books.json"
+import yaml
+
+BOOKS_DIR = "data/books"
+JSON_OUTPUT_PATH = "data/books.json"
 START_YEAR = 2020
 USER_AGENT = "Mozilla/5.0 (compatible; tecknade-serier-index/1.0)"
-GRANDOCEAN_CATEGORY_ID = 21  # "På gång"
+GRANDOCEAN_CATEGORY_IDS = [21, 14]  # "På gång" (upcoming), "Nyutkommet" (newly released)
 # image.bokus.com serves this exact image for any isbn/size it has no cover for.
 BOKUS_PLACEHOLDER_MD5 = "1de746945c6a95329b1bf40f9e2992be"
 # bokinfo.se serves this exact image when an isbn's cover folder exists but
@@ -229,26 +232,28 @@ META_LABELS = {
 }
 
 
-def fetch_grandocean(covers_dir, category_id=GRANDOCEAN_CATEGORY_ID):
-    summaries = []
-    page = 1
-    while True:
-        body = http_get(
-            "https://www.grandocean.se/json/products",
-            {"field": "categoryId", "id": category_id, "limit": 50,
-             "page": page, "currencyIso": "SEK"},
-        )
-        data = json.loads(body)
-        products = data.get("products") or []
-        if not products:
-            break
-        summaries.extend(products)
-        if len(summaries) >= data.get("amount", 0):
-            break
-        page += 1
+def fetch_grandocean(covers_dir, category_ids=GRANDOCEAN_CATEGORY_IDS):
+    summaries = {}  # keyed by product Id -- a book can appear in more than one category
+    for category_id in category_ids:
+        page = 1
+        while True:
+            body = http_get(
+                "https://www.grandocean.se/json/products",
+                {"field": "categoryId", "id": category_id, "limit": 50,
+                 "page": page, "currencyIso": "SEK"},
+            )
+            data = json.loads(body)
+            products = data.get("products") or []
+            if not products:
+                break
+            for product in products:
+                summaries[product["Id"]] = product
+            if page * 50 >= data.get("amount", 0):
+                break
+            page += 1
 
     records = []
-    for product in summaries:
+    for product in summaries.values():
         time.sleep(0.2)  # be polite to a small shop's server
         try:
             record = fetch_grandocean_detail(product)
@@ -413,8 +418,20 @@ def fetch_amazon_publication_date(page, isbn):
 
 
 # ---------------------------------------------------------------------------
-# Store
+# Store -- one yaml file per book (data/books/<id>.yaml) is the source of
+# truth, so a single edit (e.g. hiding a book) is a small git diff to one
+# file instead of a rewrite of one giant json array. `build_json` compiles
+# them into data/books.json, the flat file the web UI actually fetches --
+# see the `build` command, meant to be run in CI/a GitHub Action after the
+# yaml files are updated.
 # ---------------------------------------------------------------------------
+
+BOOK_FIELD_ORDER = [
+    "id", "isbn", "title", "authors", "publisher", "year", "published", "published_date",
+    "language", "description", "cover_url", "source_url", "bokus_search_url",
+    "sources", "grandocean_id", "hidden", "added_at",
+]
+
 
 def record_id(record):
     return record["isbn"] if record["isbn"] else \
@@ -422,20 +439,58 @@ def record_id(record):
         f"libris:{record['source_url'].rsplit('/', 1)[-1]}"
 
 
-def load_store(path):
-    try:
-        with open(path, encoding="utf-8") as f:
-            return {b["id"]: b for b in json.load(f)}
-    except FileNotFoundError:
-        return {}
+def book_filename(book_id):
+    return re.sub(r"[^A-Za-z0-9_-]", "_", book_id) + ".yaml"
 
 
-def save_store(path, store):
+def ordered_book(book):
+    ordered = {k: book[k] for k in BOOK_FIELD_ORDER if k in book}
+    ordered.update((k, v) for k, v in book.items() if k not in ordered)
+    return ordered
+
+
+def load_store(books_dir):
+    store = {}
+    if not os.path.isdir(books_dir):
+        return store
+    for name in sorted(os.listdir(books_dir)):
+        if not name.endswith(".yaml"):
+            continue
+        with open(os.path.join(books_dir, name), encoding="utf-8") as f:
+            book = yaml.safe_load(f)
+        store[book["id"]] = book
+    return store
+
+
+def save_store(books_dir, store):
+    os.makedirs(books_dir, exist_ok=True)
+    for book in store.values():
+        path = os.path.join(books_dir, book_filename(book["id"]))
+        content = yaml.safe_dump(ordered_book(book), allow_unicode=True, sort_keys=False, width=100)
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                if f.read() == content:
+                    continue  # unchanged -- skip the write, keeps git diffs to books that actually changed
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+
+
+def build_json(books_dir, json_path):
+    store = load_store(books_dir)
     books = sorted(store.values(),
                    key=lambda b: (b.get("year") or 0, b.get("published_date") or "", b["title"]),
                    reverse=True)
-    with open(path, "w", encoding="utf-8") as f:
+    with open(json_path, "w", encoding="utf-8") as f:
         json.dump(books, f, ensure_ascii=False, indent=2)
+
+
+# MTM (Myndigheten för tillgängliga medier) editions are talking-book /
+# accessible-media reissues, not original comics releases -- hidden by
+# default. Publisher text varies ("Inläst för Myndigheten för tillgängliga
+# medier, MTM", "Produced by Swedish Agency for Accessible Media, MTM",
+# plain "MTM", ...) but "MTM" itself is a reliable, consistent marker.
+def is_auto_hidden_publisher(publisher):
+    return "MTM" in (publisher or "")
 
 
 def merge(store, new_records):
@@ -449,7 +504,7 @@ def merge(store, new_records):
         )
         existing = store.get(rid)
         if not existing:
-            record["hidden"] = False
+            record["hidden"] = is_auto_hidden_publisher(record.get("publisher"))
             record["added_at"] = now
             store[rid] = record
             continue
@@ -469,13 +524,35 @@ def merge(store, new_records):
 # CLI commands
 # ---------------------------------------------------------------------------
 
+def fetch_field_with_progress(items, label, field, fetch_fn, every=50):
+    """Run fetch_fn(book) over items, storing non-empty results into book[field],
+    printing progress every `every` books so a long update doesn't look stalled."""
+    found = 0
+    total = len(items)
+    for i, b in enumerate(items, 1):
+        try:
+            value = fetch_fn(b)
+        except (urllib.error.URLError, json.JSONDecodeError) as exc:
+            print(f"warning: failed to fetch {label} for {b['id']}: {exc}", file=sys.stderr)
+            value = ""
+        if value:
+            b[field] = value
+            found += 1
+        if i % every == 0 or i == total:
+            print(f"  {i}/{total} processed, {found} found so far", file=sys.stderr)
+        time.sleep(0.1)  # be polite to the source
+    return found
+
+
 def cmd_update(args):
-    current_year = datetime.date.today().year
+    # +1 year so already-announced titles for next year (publishers typically
+    # announce roughly a year ahead) aren't excluded by the query itself.
+    year_to = datetime.date.today().year + 1
     covers_dir = os.path.join(os.path.dirname(args.data) or ".", "covers")
     store = load_store(args.data)
 
     print("Fetching Libris...", file=sys.stderr)
-    libris_records = fetch_libris(START_YEAR, current_year)
+    libris_records = fetch_libris(START_YEAR, year_to)
     print(f"  {len(libris_records)} records", file=sys.stderr)
     merge(store, libris_records)
 
@@ -486,43 +563,28 @@ def cmd_update(args):
 
     print("Fetching Bokinfo covers for books without one yet...", file=sys.stderr)
     needs_cover = [b for b in store.values() if b.get("isbn") and not b.get("cover_url")]
-    found = 0
-    for b in needs_cover:
-        cover = fetch_bokinfo_cover(b["isbn"], covers_dir)
-        if cover:
-            b["cover_url"] = cover
-            found += 1
-        time.sleep(0.1)  # be polite to the CDN
+    found = fetch_field_with_progress(
+        needs_cover, "bokinfo cover", "cover_url",
+        lambda b: fetch_bokinfo_cover(b["isbn"], covers_dir))
     print(f"  found {found}/{len(needs_cover)} covers", file=sys.stderr)
 
     print("Fetching Bokus covers for books still without one...", file=sys.stderr)
     needs_cover = [b for b in store.values() if b.get("isbn") and not b.get("cover_url")]
-    found = 0
-    for b in needs_cover:
-        cover = fetch_bokus_cover(b["isbn"], covers_dir)
-        if cover:
-            b["cover_url"] = cover
-            found += 1
-        time.sleep(0.1)  # be polite to the CDN
+    found = fetch_field_with_progress(
+        needs_cover, "bokus cover", "cover_url",
+        lambda b: fetch_bokus_cover(b["isbn"], covers_dir))
     print(f"  found {found}/{len(needs_cover)} covers", file=sys.stderr)
 
     print("Fetching Libris descriptions for books without one yet...", file=sys.stderr)
     needs_description = [b for b in store.values() if "libris" in b.get("sources", []) and not b.get("description")]
-    found = 0
-    for b in needs_description:
-        try:
-            description = fetch_libris_description(b["source_url"])
-        except (urllib.error.URLError, json.JSONDecodeError) as exc:
-            print(f"warning: failed to fetch description for {b['id']}: {exc}", file=sys.stderr)
-            description = ""
-        if description:
-            b["description"] = description
-            found += 1
-        time.sleep(0.1)  # be polite to Libris
+    found = fetch_field_with_progress(
+        needs_description, "libris description", "description",
+        lambda b: fetch_libris_description(b["source_url"]))
     print(f"  found {found}/{len(needs_description)} descriptions", file=sys.stderr)
 
     save_store(args.data, store)
     print(f"Saved {len(store)} books to {args.data}", file=sys.stderr)
+    print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
 
 
 def cmd_fetch_dates(args):
@@ -553,6 +615,7 @@ def cmd_fetch_dates(args):
                     date_iso = None
                 if date_iso:
                     b["published_date"] = date_iso
+                    b["year"] = int(date_iso[:4])  # Amazon's exact date outranks a source's rougher year guess
                     found += 1
                 if i % 20 == 0:
                     save_store(args.data, store)
@@ -563,6 +626,7 @@ def cmd_fetch_dates(args):
 
     save_store(args.data, store)
     print(f"Done: found {found}/{len(needs_date)} publication dates", file=sys.stderr)
+    print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
 
 
 def cmd_list(args):
@@ -583,11 +647,17 @@ def cmd_set_hidden(args, hidden):
     store[args.id]["hidden"] = hidden
     save_store(args.data, store)
     print(f"{'Hid' if hidden else 'Unhid'} {store[args.id]['title']}")
+    print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
+
+
+def cmd_build(args):
+    build_json(args.data, args.json_out)
+    print(f"Wrote {args.json_out}", file=sys.stderr)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data", default=DATA_PATH, help="path to books.json")
+    parser.add_argument("--data", default=BOOKS_DIR, help="path to the per-book yaml directory")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("update", help="fetch latest data from all sources and merge into the index")
@@ -595,6 +665,10 @@ def main():
     p_dates = sub.add_parser("fetch-dates",
         help="scrape exact publication dates from amazon.se (slow, needs playwright; run separately from update)")
     p_dates.add_argument("--limit", type=int, default=None, help="max number of books to process this run")
+
+    p_build = sub.add_parser("build",
+        help="compile the per-book yaml files into data/books.json for the web UI (run this in CI after editing yaml)")
+    p_build.add_argument("--json-out", default=JSON_OUTPUT_PATH, help="path to write the combined json file")
 
     sub.add_parser("list", help="list all books in the index")
 
@@ -609,6 +683,8 @@ def main():
         cmd_update(args)
     elif args.command == "fetch-dates":
         cmd_fetch_dates(args)
+    elif args.command == "build":
+        cmd_build(args)
     elif args.command == "list":
         cmd_list(args)
     elif args.command == "hide":

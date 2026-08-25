@@ -1,0 +1,18 @@
+id: '9789180580069'
+isbn: '9789180580069'
+title: Den utvalde
+authors:
+- Rosinski, Grzegorz
+publisher: 'Trosa : Cobolt'
+year: 2022
+published: '[2022]'
+published_date: '2023-02-24'
+language: swe
+description: Samlingsvolym med albumen Jolan, Tors sköld och Slaget om Asgård.
+cover_url: covers/9789180580069.jpg
+source_url: http://libris.kb.se/bib/s756lfc6qbd2bfp7
+bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180580069
+sources:
+- libris
+hidden: false
+added_at: '2026-08-24T14:44:26+00:00'

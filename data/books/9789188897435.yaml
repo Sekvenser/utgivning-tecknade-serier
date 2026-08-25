@@ -1,0 +1,21 @@
+id: '9789188897435'
+isbn: '9789188897435'
+title: Patient A
+authors:
+- Etien, David, 1981-
+publisher: 'Trosa : Cobolt'
+year: 2021
+published: '[2021]'
+published_date: '2021-03-11'
+language: swe
+description: Greve de Champignac och hans fästmö Blair arbetar som kodknäckare i Bletchley Park utanför
+  London. En natt avlyssnar man ett krypterat meddelande från kommer från ett par forskarvänner. Det är
+  bön om hjälp med att fly från Tyskland. Tillsammans med kollegan Black ger sig av till Berlin under
+  falska identiteter...
+cover_url: covers/9789188897435.jpg
+source_url: http://libris.kb.se/bib/v7hw8bpjsft6pw03
+bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789188897435
+sources:
+- libris
+hidden: false
+added_at: '2026-08-24T14:44:26+00:00'
