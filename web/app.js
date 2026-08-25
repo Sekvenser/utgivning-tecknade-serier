@@ -1,6 +1,8 @@
 const app = document.getElementById("app");
 const searchInput = document.getElementById("search");
 const yearFilter = document.getElementById("year-filter");
+const coverModal = document.getElementById("cover-modal");
+const coverModalImg = document.getElementById("cover-modal-img");
 const DEFAULT_YEAR = "2026";
 let books = [];
 
@@ -93,9 +95,9 @@ function renderDetail(id) {
     <a class="back" href="${backHref}">&larr; Tillbaka</a>
     <div class="detail">
       <div class="detail-head">
-        <div class="cover">${b.cover_url
-          ? `<img src="${escapeHtml(coverSrc(b.cover_url))}" alt="">`
-          : escapeHtml(b.title)}</div>
+        ${b.cover_url
+          ? `<div class="cover" role="button" tabindex="0" aria-label="Visa omslag i fullstorlek" data-cover="${escapeHtml(coverSrc(b.cover_url))}"><img src="${escapeHtml(coverSrc(b.cover_url))}" alt=""></div>`
+          : `<div class="cover">${escapeHtml(b.title)}</div>`}
         <div>
           <h2>${escapeHtml(b.title)}</h2>
           <dl>
@@ -113,7 +115,35 @@ function renderDetail(id) {
   `;
 }
 
+function openCoverModal(src) {
+  coverModalImg.src = src;
+  coverModal.hidden = false;
+}
+
+function closeCoverModal() {
+  coverModal.hidden = true;
+  coverModalImg.src = "";
+}
+
+app.addEventListener("click", (e) => {
+  const cover = e.target.closest(".cover[data-cover]");
+  if (cover) openCoverModal(cover.dataset.cover);
+});
+app.addEventListener("keydown", (e) => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.closest(".cover[data-cover]")) {
+    e.preventDefault();
+    openCoverModal(e.target.closest(".cover[data-cover]").dataset.cover);
+  }
+});
+coverModal.addEventListener("click", (e) => {
+  if (e.target === coverModal || e.target.classList.contains("cover-modal-close")) closeCoverModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !coverModal.hidden) closeCoverModal();
+});
+
 function route() {
+  closeCoverModal();
   const hash = location.hash || "#/";
   const bookMatch = hash.match(/^#\/book\/(.+)$/);
   const yearMatch = hash.match(/^#\/(\d{4})$/);
