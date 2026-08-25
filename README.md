@@ -48,10 +48,14 @@ The web UI doesn't read the yaml files directly — it fetches `data/books.json`
 ## View the UI
 
 ```
-python3 -m http.server 8000
+cd web && python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000/web/ — a grid of covers sorted by publication date where known, otherwise by year (newest first), with a search box, a year filter, and a detail page per book (description, ISBN, author, publisher, exact publication date where known, links).
+Then open http://localhost:8000/ — a grid of covers sorted by publication date where known, otherwise by year (newest first), with a search box, a year filter, and a detail page per book (description, ISBN, author, publisher, exact publication date where known, links). `web/data` is a symlink to `../data` so the app's relative paths (`data/books.json`, `data/covers/...`) work whether served locally like this or deployed at a domain root, with no `/web/` in the URL either way (see Deployment below).
+
+## Deployment
+
+Pushing to `main` runs `.github/workflows/pages.yml`, which regenerates `data/books.json` (`cli.py build`), assembles a site with `web/`'s contents at the root and `data/books.json` + `data/covers/` alongside them (mirroring the local symlink setup, but with real files instead — `data/books/*.yaml` itself isn't published, only the compiled json), and deploys it via GitHub Pages. Requires the repo's Pages source set to "GitHub Actions" (Settings → Pages).
 
 ## Data
 

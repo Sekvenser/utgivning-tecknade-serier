@@ -39,7 +39,7 @@ function formatDate(iso) {
 }
 
 function coverSrc(coverUrl) {
-  return coverUrl ? "../data/" + coverUrl : "";
+  return coverUrl ? "data/" + coverUrl : "";
 }
 
 function renderList() {
@@ -138,7 +138,7 @@ yearFilter.addEventListener("change", () => {
   location.hash = yearFilter.value === "all" ? "#/" : `#/${yearFilter.value}`;
 });
 
-fetch("../data/books.json")
+fetch("data/books.json")
   .then((r) => r.json())
   .then((data) => {
     books = data;
