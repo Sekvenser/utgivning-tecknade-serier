@@ -1,11 +1,14 @@
-id: 'spontaneous-combustion'
-title: 'Spontaneous Combustion'
+id: spontaneous-combustion
+title: Spontaneous Combustion
 authors:
-  - Ander, Martin
-year: 2026
-hidden: false
-language: swe
+- Ander, Martin
 publisher: Television Press
-description: 'Spontaneous Combustion är en konst- och seriebok skriven och illustrerad av Martin ”Mander” Ander och är självpublicerad genom Television Press. Spontaneous Combustion innehåller två serienoveller, samt en hel del opublicerade teckningar. Boken är på engelska, texten är översatt och bearbetad av Gareth Smith.'
+year: 2026
+language: swe
+description: Spontaneous Combustion är en konst- och seriebok skriven och illustrerad av Martin ”Mander”
+  Ander och är självpublicerad genom Television Press. Spontaneous Combustion innehåller två serienoveller,
+  samt en hel del opublicerade teckningar. Boken är på engelska, texten är översatt och bearbetad av Gareth
+  Smith.
 cover_url: covers/spontaneous-combustion.jpg
 buy_url: https://www.tnor.se/mander/books/spontaneous-combustion
+hidden: false
