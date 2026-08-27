@@ -37,6 +37,9 @@ import yaml
 
 BOOKS_DIR = "data/books"
 JSON_OUTPUT_PATH = "data/books.json"
+BOOK_PAGES_DIR = "data/book"
+SITE_URL = "https://serieutgivning.sekvenser.se"
+DEFAULT_OG_DESCRIPTION = "Ett register över svenska tecknade serier och serieromaner, utgivna sedan 2020."
 START_YEAR = 2020
 USER_AGENT = "Mozilla/5.0 (compatible; tecknade-serier-index/1.0)"
 GRANDOCEAN_CATEGORY_IDS = [21, 14]  # "På gång" (upcoming), "Nyutkommet" (newly released)
@@ -440,8 +443,14 @@ def record_id(record):
         f"libris:{record['source_url'].rsplit('/', 1)[-1]}"
 
 
+def book_slug(book_id):
+    """Filesystem/URL-safe id, used both for data/books/<slug>.yaml and for
+    the deployed /book/<slug>/ page -- one canonical place to compute it."""
+    return re.sub(r"[^A-Za-z0-9_-]", "_", book_id)
+
+
 def book_filename(book_id):
-    return re.sub(r"[^A-Za-z0-9_-]", "_", book_id) + ".yaml"
+    return book_slug(book_id) + ".yaml"
 
 
 def ordered_book(book):
@@ -459,6 +468,11 @@ def load_store(books_dir):
             continue
         with open(os.path.join(books_dir, name), encoding="utf-8") as f:
             book = yaml.safe_load(f)
+        # A hand-written yaml file's id/isbn can come out as a YAML int if left
+        # unquoted (e.g. "id: 9789181114843") -- string ops throughout assume str.
+        book["id"] = str(book["id"])
+        if book.get("isbn") is not None:
+            book["isbn"] = str(book["isbn"])
         store[book["id"]] = book
     return store
 
@@ -478,11 +492,190 @@ def save_store(books_dir, store):
 
 def build_json(books_dir, json_path):
     store = load_store(books_dir)
+    for book in store.values():
+        book["slug"] = book_slug(book["id"])  # so app.js can link straight to /book/<slug>/
     books = sorted(store.values(),
                    key=lambda b: (b.get("year") or 0, b.get("published_date") or "", b["title"]),
                    reverse=True)
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(books, f, ensure_ascii=False, indent=2)
+
+
+# --- Per-book static pages -------------------------------------------------
+#
+# Each book gets a real, fully pre-rendered page at data/book/<slug>/ (deployed
+# to /book/<slug>/) -- not a client-rendered SPA view and not a redirect stub.
+# The list page (index.html/app.js) only ever does search/filter/listing and
+# links straight to these; app.js has no concept of a "book detail route".
+#
+# render_book_detail_html() is a Python port of web/app.js's renderList()-
+# adjacent detail markup -- there is no shared template between the two, so
+# keep them in sync by hand when either changes.
+#
+# Every internal link and asset path in both this template and app.js is
+# root-absolute (e.g. "/data/...", "/#/...") on purpose: these pages live two
+# directories deep (/book/<slug>/), unlike index.html at the site root, and
+# only root-absolute paths resolve correctly from both places.
+
+def truncate_description(text, limit=200):
+    text = " ".join((text or DEFAULT_OG_DESCRIPTION).split())
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0] + "…"
+
+
+SWEDISH_MONTHS = ["januari", "februari", "mars", "april", "maj", "juni",
+                  "juli", "augusti", "september", "oktober", "november", "december"]
+
+
+def format_date_sv(iso_date):
+    year, month, day = iso_date.split("-")
+    return f"{int(day)} {SWEDISH_MONTHS[int(month) - 1]} {year}"
+
+
+def format_language_sv(language):
+    if not language:
+        return ""
+    return ", ".join(LANGUAGE_LABELS.get(code.strip(), code.strip()) for code in language.split(","))
+
+
+LANGUAGE_LABELS = {  # mirror of web/app.js's LANGUAGE_LABELS
+    "swe": "Svenska", "eng": "Engelska", "nor": "Norska", "dan": "Danska", "fin": "Finska",
+    "dut": "Nederländska", "fre": "Franska", "ger": "Tyska", "spa": "Spanska", "ita": "Italienska",
+    "cze": "Tjeckiska", "ara": "Arabiska", "sme": "Nordsamiska",
+}
+
+
+def source_label_sv(source):
+    return {"libris": "Libris", "grandocean": "GrandOcean"}.get(source, source)
+
+
+def cover_src(cover_url):
+    return f"/data/{cover_url}" if cover_url else ""
+
+
+# This markup has no JS equivalent (app.js never renders a book detail view) --
+# it only needs to be kept in sync with itself if the ad copy/design changes.
+AD_SLOT_HTML = """<aside class="ad-slot" id="ad-slot" aria-label="Annonsplats">
+        <div class="ad-label">Annonser</div>
+        <a class="ad-unit" href="https://sekvenser.se" target="_blank" rel="noopener">
+          <img src="/assets/blurb-news-cropped.png" alt="Sekvenser">
+          <p>Sekvenser 2&ndash;3 ute nu. Sveriges enda oberoende tidskrift om tecknade serier och sekventiell konst. Köp den på sekvenser.se</p>
+        </a>
+        <a class="ad-unit ad-unit-text" href="mailto:mikkeschiren@gmail.com">
+          Vill du annonsera här? Kontakta mikkeschiren@gmail.com
+        </a>
+      </aside>"""
+
+
+def render_book_detail_html(book):
+    """The only place a book's detail markup is rendered -- app.js has no
+    equivalent (it never renders a book detail view; see build_book_pages)."""
+    links = []
+    if book.get("more_info_url"):
+        links.append(f'<a href="{html.escape(book["more_info_url"])}" target="_blank" rel="noopener">Mer information</a>')
+    if book.get("buy_url"):
+        links.append(f'<a href="{html.escape(book["buy_url"])}" target="_blank" rel="noopener">Köp</a>')
+    if book.get("source_url"):
+        sources = ", ".join(source_label_sv(s) for s in book.get("sources") or [])
+        links.append(f'<a href="{html.escape(book["source_url"])}" target="_blank" rel="noopener">'
+                      f'Källa ({html.escape(sources)})</a>')
+    if book.get("bokus_search_url"):
+        links.append(f'<a href="{html.escape(book["bokus_search_url"])}" target="_blank" rel="noopener">Sök på Bokus</a>')
+
+    if book.get("cover_url"):
+        src = html.escape(cover_src(book["cover_url"]))
+        cover_html = (f'<div class="cover" role="button" tabindex="0" aria-label="Visa omslag i fullstorlek" '
+                      f'data-cover="{src}"><img src="{src}" alt=""></div>')
+    else:
+        cover_html = f'<div class="cover">{html.escape(book["title"])}</div>'
+
+    if book.get("published_date"):
+        published = format_date_sv(book["published_date"])
+    else:
+        published = book.get("published") or str(book.get("year") or "") or "–"
+
+    description_html = (f'<div class="description">{html.escape(book["description"])}</div>'
+                         if book.get("description")
+                         else '<p class="empty">Ingen textinformation tillgänglig.</p>')
+
+    return f"""<a class="back" href="/#/">&larr; Tillbaka</a>
+    <div class="detail-layout">
+      <div class="detail">
+        <div class="detail-head">
+          {cover_html}
+          <div>
+            <h2>{html.escape(book['title'])}</h2>
+            <dl>
+              <dt>Upphovsperson</dt><dd>{html.escape(", ".join(book.get("authors") or []) or "–")}</dd>
+              <dt>Förlag</dt><dd>{html.escape(book.get("publisher") or "–")}</dd>
+              <dt>Utgiven</dt><dd>{html.escape(published or "–")}</dd>
+              <dt>ISBN</dt><dd>{html.escape(book.get("isbn") or "–")}</dd>
+              <dt>Språk</dt><dd>{html.escape(format_language_sv(book.get("language")) or "–")}</dd>
+            </dl>
+            <div class="links">{" ".join(links)}</div>
+          </div>
+        </div>
+        {description_html}
+      </div>
+      {AD_SLOT_HTML}
+    </div>"""
+
+
+BOOK_META_TEMPLATE = """<title>{title}</title>
+<meta name="description" content="{description}">
+
+<meta property="og:type" content="book">
+<meta property="og:site_name" content="Svenska tecknade serier">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="{canonical_url}">
+<meta property="og:image" content="{image_url}">
+{image_dims}<meta property="og:locale" content="sv_SE">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{description}">
+<meta name="twitter:image" content="{image_url}">"""
+
+
+def build_book_pages(books_dir, pages_dir, template_path="web/index.html", site_url=SITE_URL):
+    with open(template_path, encoding="utf-8") as f:
+        template = f.read()
+    if ("<!--BOOK_META_START-->" not in template or '<main id="app"></main>' not in template
+            or "<!--TOOLBAR_START-->" not in template):
+        raise ValueError(f"{template_path} is missing an expected BOOK_META/#app/TOOLBAR marker")
+
+    # A single book page has no list to filter, so it doesn't need the
+    # search box / year picker -- drop them, keeping the rest of the header.
+    template = re.sub(r"<!--TOOLBAR_START-->.*?<!--TOOLBAR_END-->", "", template, flags=re.S)
+
+    store = load_store(books_dir)
+    for book in store.values():
+        slug = book_slug(book["id"])
+
+        if book.get("cover_url"):
+            image_url = f"{site_url}{cover_src(book['cover_url'])}"
+            image_dims = ""  # cover dimensions vary per book; omitting is valid per the OG spec
+        else:
+            image_url = f"{site_url}/assets/og-image.png"
+            image_dims = ('<meta property="og:image:width" content="1200">\n'
+                          '<meta property="og:image:height" content="630">\n')
+        meta = BOOK_META_TEMPLATE.format(
+            title=html.escape(f"{book['title']} – Svenska tecknade serier"),
+            description=html.escape(truncate_description(book.get("description"))),
+            canonical_url=html.escape(f"{site_url}/book/{slug}/"),
+            image_url=html.escape(image_url),
+            image_dims=image_dims,
+        )
+
+        page = re.sub(r"<!--BOOK_META_START-->.*?<!--BOOK_META_END-->", meta, template, flags=re.S)
+        page = page.replace('<main id="app"></main>', f'<main id="app">{render_book_detail_html(book)}</main>')
+
+        page_dir = os.path.join(pages_dir, slug)
+        os.makedirs(page_dir, exist_ok=True)
+        with open(os.path.join(page_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(page)
 
 
 # MTM (Myndigheten för tillgängliga medier) editions are talking-book /
@@ -654,6 +847,8 @@ def cmd_set_hidden(args, hidden):
 def cmd_build(args):
     build_json(args.data, args.json_out)
     print(f"Wrote {args.json_out}", file=sys.stderr)
+    build_book_pages(args.data, BOOK_PAGES_DIR)
+    print(f"Wrote per-book pages to {BOOK_PAGES_DIR}", file=sys.stderr)
 
 
 def main():
