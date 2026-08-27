@@ -3,10 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--BOOK_META_START-->
 <title>Svenska tecknade serier sedan 2020</title>
 <meta name="description" content="Ett register över svenska tecknade serier och serieromaner, utgivna sedan 2020.">
-<link rel="icon" href="assets/favicon.ico">
-<link rel="stylesheet" href="style.css">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Svenska tecknade serier">
@@ -22,6 +21,9 @@
 <meta name="twitter:title" content="Svenska tecknade serier">
 <meta name="twitter:description" content="Ett register över svenska tecknade serier och serieromaner, utgivna sedan 2020.">
 <meta name="twitter:image" content="https://serieutgivning.sekvenser.se/assets/og-image.png">
+<!--BOOK_META_END-->
+<link rel="icon" href="/assets/favicon.ico">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header>
@@ -48,14 +50,16 @@
         <path class="logo" d="M253.74,13.33c0,1.22-.72,2.52-3.6,2.59-2.3,0-3.38-1.22-3.1-3.02.07-.72.43-1.51.36-3.02,0-1.58-1.3-3.31-4.39-3.31-3.53,0-5.33,2.88-5.26,10.01l.43,27.43c0,1.58.5,4.03.5,5.26,0,1.08-.5,2.95-3.6,2.95-3.31,0-3.75-1.58-3.75-2.66,0-1.15.5-2.66.5-4.03l-.22-37.66c0-1.66-.79-2.16-.79-3.74s1.08-2.95,3.74-2.95c1.94,0,2.59.58,3.31,1.94l.5.79c1.44-1.8,3.17-3.1,7.06-3.1,5.4,0,7.92,4.54,7.92,8.35,0,2.52.36,3.02.36,4.18Z"/>
     </svg>
     </a>
-    <h1><a href="#/">Svenska tecknade serier</a></h1>
+    <h1><a href="/#/">Svenska tecknade serier</a></h1>
     <p class="tagline">Ett register över serier &amp; serieromaner, utgivna sedan 2020.</p>
     <p class="tagline">Inkluderar även viss serierelaterad utgivning, som kalendrar, fackböcker och samlingar med skämtteckningar.</p>
   </div>
+  <!--TOOLBAR_START-->
   <div class="toolbar">
     <select id="year-filter"></select>
     <input id="search" type="search" placeholder="Sök på titel eller upphovsperson…">
   </div>
+  <!--TOOLBAR_END-->
 </header>
 <main id="app"></main>
 <div id="cover-modal" class="cover-modal" hidden>
@@ -66,6 +70,6 @@
   Denna webbtjänst är utvecklad av <a href="https://sekvenser.se" target="_blank" rel="noopener">Tidskriften Sekvenser</a>. Tjänsten kan innehålla fel och bygger på ett flertal olika källor.
   Bidrag och rättelser görs i <a href="https://github.com/Sekvenser/utgivning-tecknade-serier">vårt repo</a>.
 </footer>
-<script src="app.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>
