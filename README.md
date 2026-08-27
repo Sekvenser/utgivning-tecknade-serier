@@ -6,7 +6,7 @@ Index of Swedish comics, graphic novels and related publications, published sinc
 
 Saknas en utgivning? Då kan du lägga till den själv:
 
-**1. Klona ned repot**
+**1. Klona ned repot** Skapa en fork och klona ned.
 
 **2. Skapa en yaml-fil** i `data/books/`, t.ex. `data/books/mitt-fanzin-3.yaml` (filnamnet ska vara samma som id, måste sluta på `.yaml` och vara unikt i mappen, och inte innehålla mellanslag, specialtecken eller åäö). Minsta innehåll som behövs:
 
