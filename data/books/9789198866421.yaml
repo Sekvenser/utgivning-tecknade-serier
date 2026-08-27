@@ -1,13 +1,16 @@
 id: '9789198866421'
 isbn: '9789198866421'
-title: 'Seriearkivets årsbok 2026'
+title: Seriearkivets årsbok 2026
 authors:
 - Strömberg, Fredrik, 1968-
-publisher: 'Seriearkivet'
+- Hellsten, Ola, 1972-
+- Demervall, Per, 1955-
+- Storn, Thomas, 1968-
+publisher: Seriearkivet
 year: 2026
 published: '[2026]'
 language: swe
-description: ""
-cover_url: 'covers/9789198866421.webp'
+description: ''
+cover_url: covers/9789198866421.webp
 buy_url: https://www.seriearkivet.se/product/seriearkivets-arbok-2026/
 hidden: false

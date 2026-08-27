@@ -1,17 +1,24 @@
 id: '9789198866223'
 isbn: '9789198866223'
-title: 'Gökboet : den kompletta samlingen · Del 2 · 2022'
+title: Claes Reimerthi – En Lågmäld Hjälte
 authors:
-- Strömberg, Hanna, 1974-
-publisher: 'Malmö : Ego Comics'
-year: 2023
-published: '[2023]'
+- Reimerthi, Claes, 1955-2021
+- Strömberg, Fredrik, 1968-
+publisher: Seriearkivet
+year: 2025
+published: '[2025]'
+published_date: '2025-05-24'
 language: swe
-description: ''
-cover_url: ''
+description: 'Manusförfattaren och seriehistorikern Claes Reimerthi gick bort alltför tidigt, i juli 2021.
+  Claes var oerhört produktiv, en av Sveriges internationellt mest spridda serieskapare och tillika en
+  mycket trevlig och uppskattad person – något som denna välfyllda hyllningsbok är bevis på.
+
+  Boken samlar texter om, av och med Claes, inte minst hyllningar i text och bild av de många personer
+  som samarbetade med Claes någon gång under hans långa och varierande karriär.'
+cover_url: covers/9789198866346.jpg
 source_url: http://libris.kb.se/bib/xfc0h0f1vj3rrmff
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198866223
+buy_url: https://www.seriearkivet.se/product/claes-reimerthi-en-lagmald-hjalte/
 sources:
 - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'

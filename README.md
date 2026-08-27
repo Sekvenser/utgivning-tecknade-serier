@@ -1,6 +1,6 @@
 # Tecknade serier sedan 2020
 
-Index of Swedish comics & graphic novels published since 2020.
+Index of Swedish comics, graphic novels and related publications, published since 2020.
 
 ## Bidra!
 
@@ -12,7 +12,7 @@ Saknas en utgivning? Då kan du lägga till den själv:
 
 ```yaml
 id: mitt-fanzin-3
-title: Mitt Fanzin #3
+title: "Mitt Fanzin #3"
 authors:
   - Efternamn, Förnamn
 year: 2026
@@ -24,12 +24,16 @@ Har utgivningen ett ISBN, använd det (utan bindestreck) som `id` (och filnamn) 
 ```yaml
 isbn: "9789180581196"
 publisher: Eget förlag
-description: En kort text om utgivningen.
-cover_url: covers/mitt-fanzin-3.jpg
+description: "En kort text om utgivningen."
+cover_url: covers/9789180581196.jpg
 more_info_url: https://exempel.se
 buy_url: https://exempel.se/kop
 ```
 
+Om det inte finns en webbplats att köpa ifrån, och det fortfarande går att köpa utgåvan, lägg in i beskrivningstexten (description) hur man gör.
+
 **3. Lägg till ett omslag** (valfritt): spara bildfilen i `data/covers/`, t.ex. `data/covers/mitt-fanzin-3.jpg`, och peka på den med `cover_url: covers/mitt-fanzin-3.jpg` ovan.
 
-**4. Skicka en pull request** med den nya filen (och ev. omslagsbilden). Inget behöver köras lokalt — sajten byggs om automatiskt när ändringen är sammanslagen till `main`.
+**4. Skicka en pull request** med den nya filen (och ev. omslagsbilden).
+
+Du kan även skapa en [issue](https://github.com/Sekvenser/utgivning-tecknade-serier/issues), och lägga in informationen som du vill ha med, om du känner dig osäker på hur man använder git.
