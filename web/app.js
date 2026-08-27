@@ -93,24 +93,36 @@ function renderDetail(id) {
 
   app.innerHTML = `
     <a class="back" href="${backHref}">&larr; Tillbaka</a>
-    <div class="detail">
-      <div class="detail-head">
-        ${b.cover_url
-          ? `<div class="cover" role="button" tabindex="0" aria-label="Visa omslag i fullstorlek" data-cover="${escapeHtml(coverSrc(b.cover_url))}"><img src="${escapeHtml(coverSrc(b.cover_url))}" alt=""></div>`
-          : `<div class="cover">${escapeHtml(b.title)}</div>`}
-        <div>
-          <h2>${escapeHtml(b.title)}</h2>
-          <dl>
-            <dt>Upphovsperson</dt><dd>${escapeHtml((b.authors || []).join(", ") || "–")}</dd>
-            <dt>Förlag</dt><dd>${escapeHtml(b.publisher || "–")}</dd>
-            <dt>Utgiven</dt><dd>${b.published_date ? escapeHtml(formatDate(b.published_date)) : escapeHtml(b.published || String(b.year || "") || "–")}</dd>
-            <dt>ISBN</dt><dd>${escapeHtml(b.isbn || "–")}</dd>
-            <dt>Språk</dt><dd>${escapeHtml(formatLanguage(b.language) || "–")}</dd>
-          </dl>
-          <div class="links">${links.join(" ")}</div>
+    <div class="detail-layout">
+      <div class="detail">
+        <div class="detail-head">
+          ${b.cover_url
+            ? `<div class="cover" role="button" tabindex="0" aria-label="Visa omslag i fullstorlek" data-cover="${escapeHtml(coverSrc(b.cover_url))}"><img src="${escapeHtml(coverSrc(b.cover_url))}" alt=""></div>`
+            : `<div class="cover">${escapeHtml(b.title)}</div>`}
+          <div>
+            <h2>${escapeHtml(b.title)}</h2>
+            <dl>
+              <dt>Upphovsperson</dt><dd>${escapeHtml((b.authors || []).join(", ") || "–")}</dd>
+              <dt>Förlag</dt><dd>${escapeHtml(b.publisher || "–")}</dd>
+              <dt>Utgiven</dt><dd>${b.published_date ? escapeHtml(formatDate(b.published_date)) : escapeHtml(b.published || String(b.year || "") || "–")}</dd>
+              <dt>ISBN</dt><dd>${escapeHtml(b.isbn || "–")}</dd>
+              <dt>Språk</dt><dd>${escapeHtml(formatLanguage(b.language) || "–")}</dd>
+            </dl>
+            <div class="links">${links.join(" ")}</div>
+          </div>
         </div>
+        ${b.description ? `<div class="description">${escapeHtml(b.description)}</div>` : `<p class="empty">Ingen textinformation tillgänglig.</p>`}
       </div>
-      ${b.description ? `<div class="description">${escapeHtml(b.description)}</div>` : `<p class="empty">Ingen textinformation tillgänglig.</p>`}
+      <aside class="ad-slot" id="ad-slot" aria-label="Annonsplats">
+        <div class="ad-label">Annonsplats</div>
+        <a class="ad-unit" href="https://sekvenser.se" target="_blank" rel="noopener">
+          <img src="assets/blurb-news-cropped.png" alt="Sekvenser">
+          <p>Sekvenser 2&ndash;3 ute nu. Köp den på sekvenser.se</p>
+        </a>
+        <a class="ad-unit ad-unit-text" href="mailto:mikkeschiren@gmail.com">
+          Vill du annonsera här? Kontakta mikkeschiren@gmail.com
+        </a>
+      </aside>
     </div>
   `;
 }
