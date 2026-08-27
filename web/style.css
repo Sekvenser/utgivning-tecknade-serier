@@ -148,6 +148,10 @@ footer a { color: var(--accent); }
 .detail { max-width: 680px; }
 .detail-head { display: flex; gap: 2rem; margin-bottom: 2rem; }
 .detail-head .cover { width: 200px; flex-shrink: 0; }
+@media (max-width: 600px) {
+  .detail-head { flex-direction: column; }
+  .detail-head .cover { width: 100%; }
+}
 .cover[data-cover] { cursor: zoom-in; }
 .cover[data-cover]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
