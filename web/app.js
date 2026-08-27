@@ -117,7 +117,7 @@ function renderDetail(id) {
         <div class="ad-label">Annonsplats</div>
         <a class="ad-unit" href="https://sekvenser.se" target="_blank" rel="noopener">
           <img src="assets/blurb-news-cropped.png" alt="Sekvenser">
-          <p>Sekvenser 2&ndash;3 ute nu. Köp den på sekvenser.se</p>
+          <p>Sekvenser 2&ndash;3 ute nu. Sveriges enda oberoende tidskrift om tecknade serier och sekventiell konst. Köp den på sekvenser.se</p>
         </a>
         <a class="ad-unit ad-unit-text" href="mailto:mikkeschiren@gmail.com">
           Vill du annonsera här? Kontakta mikkeschiren@gmail.com
