@@ -114,7 +114,7 @@ function renderDetail(id) {
         ${b.description ? `<div class="description">${escapeHtml(b.description)}</div>` : `<p class="empty">Ingen textinformation tillgänglig.</p>`}
       </div>
       <aside class="ad-slot" id="ad-slot" aria-label="Annonsplats">
-        <div class="ad-label">Annonsplats</div>
+        <div class="ad-label">Annonser</div>
         <a class="ad-unit" href="https://sekvenser.se" target="_blank" rel="noopener">
           <img src="assets/blurb-news-cropped.png" alt="Sekvenser">
           <p>Sekvenser 2&ndash;3 ute nu. Sveriges enda oberoende tidskrift om tecknade serier och sekventiell konst. Köp den på sekvenser.se</p>
