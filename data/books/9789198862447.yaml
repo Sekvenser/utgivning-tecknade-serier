@@ -1,17 +1,17 @@
-id: '9789198862447'
-isbn: '9789198862447'
+id: "9789198862447"
+isbn: "9789198862447"
 title: Kvarnby serier 2025
 authors:
-- Abdulrahman, Alqasem
-publisher: 'Malmö : Kvarnby folkhögskola'
+  - Abdulrahman, Alqasem
+publisher: "Malmö : Kvarnby folkhögskola"
 year: 2025
-published: '[2025]'
+published: "[2025]"
 language: swe
-description: ''
-cover_url: ''
+description: ""
+cover_url: "covers/kvarnby-serier-2025.jpg"
 source_url: http://libris.kb.se/bib/3n049j9k1rzgnm5z
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198862447
 sources:
-- libris
+  - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'
+added_at: "2026-08-24T14:44:26+00:00"

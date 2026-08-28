@@ -1,17 +1,17 @@
-id: '9789198502596'
-isbn: '9789198502596'
-title: 'Serien om seriestaden · #3 · Seriecentrum i Mazettihuset. 2003-2005'
+id: "9789198502596"
+isbn: "9789198502596"
+title: "Serien om seriestaden · #3 · Seriecentrum i Mazettihuset. 2003-2005"
 authors:
-- Krantz, Gunnar, 1962-
-publisher: '[Malmö] : [Seriekonst/Gunnar Krantz]'
+  - Krantz, Gunnar, 1962-
+publisher: "[Malmö] : [Seriekonst/Gunnar Krantz]"
 year: 2026
-published: '[2026]'
+published: "[2026]"
 language: swe
-description: ''
-cover_url: ''
+description: ""
+cover_url: "covers/9789198502596.jpg"
 source_url: http://libris.kb.se/bib/8wmq568t6kf0n0x9
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198502596
 sources:
-- libris
+  - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'
+added_at: "2026-08-24T14:44:26+00:00"

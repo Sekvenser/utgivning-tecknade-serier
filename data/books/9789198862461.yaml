@@ -1,17 +1,17 @@
-id: '9789198862461'
-isbn: '9789198862461'
+id: "9789198862461"
+isbn: "9789198862461"
 title: Kvarnby serier 2026
 authors:
-- Larsson, Sante
-publisher: 'Malmö : Kvarnby folkhögskola'
+  - Larsson, Sante
+publisher: "Malmö : Kvarnby folkhögskola"
 year: 2026
-published: '[2026]'
+published: "[2026]"
 language: swe
-description: ''
-cover_url: ''
+description: ""
+cover_url: "covers/kvarnby-serier-2026.jpg"
 source_url: http://libris.kb.se/bib/d12d5fptbk435v5w
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198862461
 sources:
-- libris
+  - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'
+added_at: "2026-08-24T14:44:26+00:00"
