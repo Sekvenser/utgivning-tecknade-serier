@@ -10,7 +10,6 @@ language: eng, swe, nor, dan, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/8pgc0qt267qqh5cb
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Sing%202
 sources:
 - libris
 hidden: true

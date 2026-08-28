@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/9789188897312.jpg
 source_url: http://libris.kb.se/bib/8lxv6cnm6r8qm4z3
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789188897312
 sources:
 - libris
 hidden: false

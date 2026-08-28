@@ -449,16 +449,20 @@ def fetch_amazon_publication_date(page, isbn):
 
 BOOK_FIELD_ORDER = [
     "id", "isbn", "title", "authors", "publisher", "year", "published", "published_date",
-    "language", "description", "cover_url", "source_url", "bokus_search_url",
+    "language", "description", "cover_url", "source_url",
     "more_info_url", "buy_url",  # optional, hand-curated -- not filled in by any scraper
     "sources", "grandocean_id", "hidden", "added_at",
 ]
 
 
 def record_id(record):
-    return record["isbn"] if record["isbn"] else \
-        f"go:{record['grandocean_id']}" if "grandocean_id" in record else \
-        f"libris:{record['source_url'].rsplit('/', 1)[-1]}"
+    if record.get("isbn"):
+        return record["isbn"]
+    if "grandocean_id" in record:
+        return f"go:{record['grandocean_id']}"
+    if record.get("source_url"):
+        return f"libris:{record['source_url'].rsplit('/', 1)[-1]}"
+    return record["id"]  # a manually-authored book with none of the above -- keep its own id as-is
 
 
 def book_slug(book_id):
@@ -589,17 +593,37 @@ AD_SLOT_HTML = """<aside class="ad-slot" id="ad-slot" aria-label="Annonsplats">
 def render_book_detail_html(book):
     """The only place a book's detail markup is rendered -- app.js has no
     equivalent (it never renders a book detail view; see build_book_pages)."""
+    # buy_url is the recommended place to buy the book (typically the
+    # publisher's own shop) -- shown first and styled to stand out from the
+    # plain-text links below, which are either informational or just search
+    # links to general marketplaces/used-book sites.
+    buy_html = ""
+    if book.get("buy_url"):
+        buy_html = (f'<div class="links-buy"><a class="buy-link" href="{html.escape(book["buy_url"])}" '
+                    f'target="_blank" rel="noopener">Köp</a></div>')
+
     links = []
     if book.get("more_info_url"):
         links.append(f'<a href="{html.escape(book["more_info_url"])}" target="_blank" rel="noopener">Mer information</a>')
-    if book.get("buy_url"):
-        links.append(f'<a href="{html.escape(book["buy_url"])}" target="_blank" rel="noopener">Köp</a>')
     if book.get("source_url"):
         sources = ", ".join(source_label_sv(s) for s in book.get("sources") or [])
         links.append(f'<a href="{html.escape(book["source_url"])}" target="_blank" rel="noopener">'
                       f'Källa ({html.escape(sources)})</a>')
-    if book.get("bokus_search_url"):
-        links.append(f'<a href="{html.escape(book["bokus_search_url"])}" target="_blank" rel="noopener">Sök på Bokus</a>')
+
+    # Kept on its own line, separate from `links` above: automated per-store
+    # search links, not curated/verified the way more_info_url/buy_url are.
+    # Always all five, since they're pure functions of title/isbn.
+    search_urls = title_search_urls(book)
+    other_links = [
+        f'<a href="{html.escape(search_urls[field])}" target="_blank" rel="noopener">{label}</a>'
+        for field, label in [
+            ("bokus_search_url", "Bokus"),
+            ("adlibris_search_url", "Adlibris"),
+            ("bokborsen_search_url", "Bokbörsen"),
+            ("seriersant_search_url", "Serier & Sånt"),
+            ("seriekatalogen_search_url", "Seriekatalogen"),
+        ]
+    ]
 
     if book.get("cover_url"):
         src = html.escape(cover_src(book["cover_url"]))
@@ -631,7 +655,9 @@ def render_book_detail_html(book):
               <dt>ISBN</dt><dd>{html.escape(book.get("isbn") or "–")}</dd>
               <dt>Språk</dt><dd>{html.escape(format_language_sv(book.get("language")) or "–")}</dd>
             </dl>
+            {buy_html}
             <div class="links">{" ".join(links)}</div>
+            {f'<div class="links-other"><span class="links-other-label">Hitta</span>{" ".join(other_links)}</div>' if other_links else ""}
           </div>
         </div>
         {description_html}
@@ -764,26 +790,36 @@ def merge(store, new_records):
     for record in new_records:
         rid = record_id(record)
         record["id"] = rid
-        record["bokus_search_url"] = (
-            "https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word="
-            + urllib.parse.quote(record["isbn"] or record["title"])
-        )
         existing = store.get(rid)
         if not existing:
             record["hidden"] = is_auto_hidden_publisher(record.get("publisher"))
             record["added_at"] = now
             store[rid] = record
             continue
-        for key in ("title", "publisher", "year", "published", "description"):
+        for key in ("title", "publisher", "year", "published", "description", "source_url"):
             if not existing.get(key) and record.get(key):
                 existing[key] = record[key]
         if record.get("cover_url"):  # freshly (re)downloaded, always the best copy we have
             existing["cover_url"] = record["cover_url"]
         existing["authors"] = sorted(set(existing.get("authors", [])) | set(record.get("authors", [])))
         existing["sources"] = sorted(set(existing.get("sources", [])) | set(record.get("sources", [])))
-        existing["source_url"] = existing.get("source_url") or record.get("source_url")
-        existing["bokus_search_url"] = record["bokus_search_url"]
     return store
+
+
+# Automated per-store search links for a book detail page -- pure functions of
+# title/isbn, computed at render time so they're never stale and never stored.
+def title_search_urls(book):
+    q = urllib.parse.quote(book.get("isbn") or book["title"])
+    qt = urllib.parse.quote(book["title"])
+    qt_plus = urllib.parse.quote_plus(book["title"])
+    q_plus = urllib.parse.quote_plus(book.get("isbn") or book["title"])
+    return {
+        "bokus_search_url": f"https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word={q}",
+        "adlibris_search_url": f"https://www.adlibris.com/sv/sok?q={qt}",
+        "bokborsen_search_url": f"https://www.bokborsen.se/?g=0&c=0&q={qt_plus}&qa=&qt=&qi=&qs=&f=1&fi=&fd=&pb=&_s=created_at&_d=desc",
+        "seriersant_search_url": f"https://seriersant.se/?s={q_plus}&post_type=product&dgwt_wcas=1",
+        "seriekatalogen_search_url": f"https://www.seriekatalogen.se/?q={qt_plus}&page=1",
+    }
 
 
 # ---------------------------------------------------------------------------

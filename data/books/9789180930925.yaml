@@ -13,7 +13,6 @@ description: Kosmisk action!  Bu, Luna och Orion är ute på hjälteuppdrag i ry
   fånga hjältarna.
 cover_url: covers/9789180930925.jpg
 source_url: http://libris.kb.se/bib/7qxpjd8553chgq6k
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180930925
 sources:
 - libris
 hidden: false

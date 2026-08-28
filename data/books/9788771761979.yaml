@@ -10,7 +10,6 @@ language: swe
 description: Rappt och roligt i serieformat om astronomen Tycho Brahes dramatiska liv
 cover_url: covers/bokinfo_9788771761979.jpg
 source_url: http://libris.kb.se/bib/k2z1htw3h24d8tdx
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9788771761979
 sources:
 - libris
 hidden: false

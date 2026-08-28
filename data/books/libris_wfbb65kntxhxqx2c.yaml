@@ -10,7 +10,6 @@ language: eng, swe, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/wfbb65kntxhxqx2c
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Inside%20out%202
 sources:
 - libris
 hidden: true

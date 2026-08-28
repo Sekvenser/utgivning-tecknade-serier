@@ -10,7 +10,6 @@ language: eng
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/s5v40891q010ff1q
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Moominvalley%20%C2%B7%20Season%201
 sources:
 - libris
 hidden: true

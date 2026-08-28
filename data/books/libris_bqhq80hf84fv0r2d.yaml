@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/bqhq80hf84fv0r2d
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Farbror%20Joakims%20%C3%A4ventyr%20%C2%B7%201%20%C2%B7%20V%C3%A4rldens%20rikaste%20anka
 sources:
 - libris
 hidden: false

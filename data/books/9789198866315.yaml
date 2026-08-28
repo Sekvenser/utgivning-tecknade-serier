@@ -2,9 +2,9 @@ id: '9789198866315'
 isbn: '9789198866315'
 title: Seriearkivets årsbok 2025
 authors:
-- Strömberg, Fredrik, 1968-
 - Aman, Robert 1982-
 - Lundström, Janne  1941-
+- Strömberg, Fredrik, 1968-
 publisher: Seriearkivet
 year: 2025
 published: '[2025]'
@@ -18,4 +18,5 @@ description: Detta är Seriearkivets andra årsbok, som innehåller en redogöre
   mycket mer.
 cover_url: covers/9789198866315.webp
 buy_url: https://www.seriearkivet.se/product/seriearkivets-arbok-2025/
+sources: []
 hidden: false

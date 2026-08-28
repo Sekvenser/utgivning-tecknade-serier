@@ -11,7 +11,6 @@ language: swe
 description: Arkin - den blygsamma pojken som tar sig an en magisk värld.
 cover_url: covers/9789180740098.jpg
 source_url: http://libris.kb.se/bib/9r188jlg7x8w6l0c
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180740098
 sources:
 - libris
 hidden: false

@@ -11,7 +11,6 @@ language: swe
 description: ''
 cover_url: covers/9781637790991.jpg
 source_url: http://libris.kb.se/bib/k65xq8v0hrnnwdn9
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9781637790991
 sources:
 - libris
 hidden: true

@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/zffgtr91wpx22skg
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Bilbo%20hobbiten%20%3A%20bort%20och%20hem%20igen
 sources:
 - libris
 hidden: false

@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/5qj90fhf3z2dw418
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=100%20%C3%A5r%20av%20svensk%20nazism
 sources:
 - libris
 hidden: false

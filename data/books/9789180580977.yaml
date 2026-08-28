@@ -10,7 +10,6 @@ language: swe
 description: Specialutgåvan av Månen tur och retur del 1 och 2 samlar båda albumen i en volym.
 cover_url: covers/9789180580977.jpg
 source_url: http://libris.kb.se/bib/k387dpvlhcq4p31b
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180580977
 sources:
 - libris
 hidden: false

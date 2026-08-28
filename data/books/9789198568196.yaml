@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/bokinfo_9789198568196.jpg
 source_url: http://libris.kb.se/bib/q397xw6mngg3v5gl
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198568196
 sources:
 - libris
 hidden: false

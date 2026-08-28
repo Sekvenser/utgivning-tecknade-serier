@@ -13,7 +13,6 @@ description: Carmen letar efter en mus som hon tror sig ha sett i köket. När V
   mås och stjäl alltihop.
 cover_url: ''
 source_url: http://libris.kb.se/bib/q9gg335tndlm4h94
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Grannar%20%C2%B7%20Mus%20eller%20mos
 sources:
 - libris
 hidden: true

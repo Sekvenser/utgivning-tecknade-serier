@@ -52,7 +52,7 @@ python3 cli.py build
 
 The web UI doesn't read the yaml files directly — it fetches `data/books.json`, one flat json array compiled from them. Run `build` after any command that touches the yaml (`update`, `fetch-dates`, `hide`, `unhide`) and before viewing the UI or deploying. This is the command a CI job (e.g. a GitHub Action, on every push that changes `data/books/`) should run to regenerate the deployed json.
 
-`build` also writes one fully pre-rendered static page per book into `data/book/<slug>/index.html` (`slug` is the sanitized book id) — see "Per-book static pages" below.
+`build` also writes one fully pre-rendered static page per book into `data/book/<slug>/index.html` (`slug` is the sanitized book id) — see "Per-book static pages" below — and a sitemap at `data/sitemap.xml` (deployed to `/data/sitemap.xml`, declared in `web/robots.txt`), listing the homepage plus every non-hidden book's page. Hidden books are left out on purpose — no reason to invite crawlers to pages the site itself doesn't link to. Nowhere near it today (~1700 URLs), but `build_sitemap()` in `cli.py` follows the sitemap protocol's 50,000-URL-per-file limit correctly: past that it splits into numbered `sitemap-N.xml` files with `sitemap.xml` becoming a `<sitemapindex>` instead, rather than silently producing one giant invalid file.
 
 ## View the UI
 
@@ -74,7 +74,7 @@ Every internal link and asset path in both `web/app.js` and the generated pages 
 
 ## Deployment
 
-Pushing to `main` runs `.github/workflows/pages.yml`, which regenerates `data/books.json` and `data/book/*` (`cli.py build`), assembles a site with `web/`'s contents at the root, `data/books.json` + `data/covers/` alongside them, and the per-book pages at `book/` (mirroring the local symlink setup, but with real files instead — `data/books/*.yaml` itself isn't published, only the compiled json and the generated pages), and deploys it via GitHub Pages. Requires the repo's Pages source set to "GitHub Actions" (Settings → Pages).
+Pushing to `main` runs `.github/workflows/pages.yml`, which regenerates `data/books.json`, `data/sitemap*.xml`, and `data/book/*` (`cli.py build`), assembles a site with `web/`'s contents at the root, `data/books.json` + `data/sitemap*.xml` + `data/covers/` alongside them, and the per-book pages at `book/` (mirroring the local symlink setup, but with real files instead — `data/books/*.yaml` itself isn't published, only the compiled json/sitemap and the generated pages), and deploys it via GitHub Pages. Requires the repo's Pages source set to "GitHub Actions" (Settings → Pages).
 
 The same push also runs `.github/workflows/release.yml`, which creates a GitHub Release tagged `v1.0`, `v1.1`, `v1.2`, ... (minor version bumped by one from whatever the latest existing release is, starting at `v1.0` if there are none yet) with `data/books.json` attached as the release's only artifact. It triggers on `push` rather than `pull_request: closed` deliberately — a `pull_request`-triggered workflow gets a read-only token when the PR is from a fork, which would silently fail to create a release for external contributors.
 
@@ -84,7 +84,9 @@ Each book is one file under `data/books/<id>.yaml` — the source of truth, mean
 
 Cover images are downloaded into `data/covers/` during `update` (skipped if already present) so the UI never depends on external image hosts.
 
-Two link fields are hand-curated rather than scraped — add `more_info_url` and/or `buy_url` directly to a book's yaml file (e.g. a homepage or the publisher's own web shop) and they'll show up as "Mer information" / "Köp" links on that book's page after the next `build`.
+Two link fields are hand-curated rather than scraped — add `more_info_url` and/or `buy_url` directly to a book's yaml file (e.g. a homepage or the publisher's own web shop) and they'll show up as "Mer information" / "Köp" links on that book's page after the next `build`. When `buy_url` is set it renders first, as a standout button (it's the recommended way to get the book), above the plain text links.
+
+`render_book_detail_html()` also shows a "Hitta" group of links to five bookstore sites (Bokus, Adlibris, Bokbörsen, Serier & Sånt, Seriekatalogen), computed at build time by `title_search_urls()` from the book's `isbn`/`title` — pure functions of data already in the yaml, so they are never stored as fields and never need backfilling; only `more_info_url`/`buy_url` are hand-curated in the yaml itself.
 
 Requires `PyYAML` (`pip install -r requirements.txt`).
 

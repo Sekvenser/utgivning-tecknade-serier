@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/n5mg4vsgl082nbh2
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=%C3%84r%20vi%20okej%3F
 sources:
 - libris
 hidden: false

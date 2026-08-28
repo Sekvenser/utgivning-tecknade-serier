@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/9789180741194.jpg
 source_url: http://libris.kb.se/bib/vdl1wb2fs5t0f9ct
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180741194
 sources:
 - libris
 hidden: false

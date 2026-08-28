@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/9789152724903.jpg
 source_url: http://libris.kb.se/bib/5sbc782f3j158xlq
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789152724903
 buy_url: https://www.homemadecomics.org/butik/ingen-kan-se-dig-eepej-2026
 sources:
 - libris

@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/9789198502572.jpg
 source_url: http://libris.kb.se/bib/xk9dsp91v45jv45m
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198502572
 sources:
 - libris
 hidden: false

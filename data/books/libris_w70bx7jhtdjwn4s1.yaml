@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/w70bx7jhtdjwn4s1
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Musse%20Piggs%20deckarg%C3%A5tor
 sources:
 - libris
 hidden: false

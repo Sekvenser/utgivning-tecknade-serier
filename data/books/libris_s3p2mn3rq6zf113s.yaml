@@ -10,7 +10,6 @@ language: eng, swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/s3p2mn3rq6zf113s
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=The%20Angry%20Birds%20movie%202
 sources:
 - libris
 hidden: true

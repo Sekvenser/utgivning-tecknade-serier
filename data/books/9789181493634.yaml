@@ -2,16 +2,16 @@ id: '9789181493634'
 isbn: '9789181493634'
 title: 'Sekvenser #2-3 (vol. 2)'
 authors:
-- Schirén, Mikke
 - Aman, Robert
+- Chernetska, Alla
+- Dejasse, Erwin
 - Jonason, Magnus
-- Soronen, Marianne
 - Krantz, Lars
 - Liljemark, David
-- Dejasse, Erwin
-- Chernetska, Alla
-- Sjögren, Nemo
 - Saar, C.
+- Schirén, Mikke
+- Sjögren, Nemo
+- Soronen, Marianne
 publisher: Sekvenser
 year: 2026
 language: swe
@@ -20,4 +20,5 @@ description: 'Tema: L''art Brut. Debatt. Serier. Sveriges enda oberoende tidskri
 cover_url: covers/sekvenser_2-3.jpg
 more_info_url: https://sekvenser.se/
 buy_url: https://sekvenser.se/
+sources: []
 hidden: false

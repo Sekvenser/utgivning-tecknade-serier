@@ -10,7 +10,6 @@ language: eng, swe, nor, dan, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/gv0sqkfndxsfd9sf
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Peter%20Rabbit%202%20-%20The%20runaway
 sources:
 - libris
 hidden: true

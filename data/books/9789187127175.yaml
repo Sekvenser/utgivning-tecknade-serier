@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: covers/bokinfo_9789187127175.jpg
 source_url: http://libris.kb.se/bib/9wz0xlzx7lcgsf0s
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789187127175
 sources:
 - libris
 hidden: false

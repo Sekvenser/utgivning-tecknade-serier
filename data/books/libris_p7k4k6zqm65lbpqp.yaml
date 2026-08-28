@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/p7k4k6zqm65lbpqp
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Mal%20magasin%20%3A%20alternativserier%20%C2%B7%20%2310%20%28nr.%203/2024%29%20%C2%B7%20Mina%20anekdoter%20levererar
 sources:
 - libris
 hidden: false
