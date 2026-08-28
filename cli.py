@@ -174,6 +174,23 @@ def fetch_libris(year_from, year_to):
     return [r for r in records if r]
 
 
+def parse_libris_id(url_or_id):
+    """Accepts a bare id, or a full libris.kb.se URL in any of its forms
+    (with or without "/bib/", trailing slash, or a "?_q=..." query string)."""
+    path = urllib.parse.urlparse(url_or_id.strip()).path
+    return path.rstrip("/").rsplit("/", 1)[-1]
+
+
+def fetch_libris_by_id(libris_id):
+    """Look up one record directly by its Libris id ("onr" = object number)
+    via xsearch, instead of the full JSON-LD record -- xsearch already
+    resolves author names to clean strings, where the raw JSON-LD often only
+    links to a separate, unfetched record for each contributor."""
+    body = http_get("https://libris.kb.se/xsearch", {"query": f"onr:{libris_id}", "format": "json", "n": 1})
+    items = json.loads(body)["xsearch"]["list"]
+    return items[0] if items else None
+
+
 def normalize_libris(item):
     isbn = re.sub(r"[^0-9Xx]", "", first(item.get("isbn", "")))
     year = extract_year(item.get("date"))
@@ -823,6 +840,38 @@ def cmd_fetch_dates(args):
     print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
 
 
+def cmd_add_libris(args):
+    libris_id = parse_libris_id(args.url_or_id)
+    item = fetch_libris_by_id(libris_id)
+    if not item:
+        print(f"No Libris record found for '{args.url_or_id}' (onr:{libris_id})", file=sys.stderr)
+        sys.exit(1)
+
+    record = normalize_libris(item)
+    if not record:
+        print(f"Found '{item.get('title')}' but it's from before {START_YEAR} (the index's cutoff year) "
+              f"-- add it by hand in data/books/ if you still want it (see README.md).", file=sys.stderr)
+        sys.exit(1)
+
+    covers_dir = os.path.join(os.path.dirname(args.data) or ".", "covers")
+    store = load_store(args.data)
+    is_new = record_id(record) not in store
+    merge(store, [record])
+    book = store[record_id(record)]
+
+    if not book.get("cover_url") and book.get("isbn"):
+        book["cover_url"] = fetch_bokinfo_cover(book["isbn"], covers_dir) or fetch_bokus_cover(book["isbn"], covers_dir)
+    if not book.get("description") and "libris" in book.get("sources", []):
+        try:
+            book["description"] = fetch_libris_description(book["source_url"])
+        except (urllib.error.URLError, json.JSONDecodeError):
+            pass
+
+    save_store(args.data, store)
+    print(f"{'Added' if is_new else 'Updated'} '{book['title']}' ({book['id']})", file=sys.stderr)
+    print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
+
+
 def cmd_list(args):
     store = load_store(args.data)
     books = sorted(store.values(),
@@ -858,6 +907,10 @@ def main():
 
     sub.add_parser("update", help="fetch latest data from all sources and merge into the index")
 
+    p_add = sub.add_parser("add-libris",
+        help="fetch a single book from Libris by URL or bare id and add/update it in the index")
+    p_add.add_argument("url_or_id", help="e.g. https://libris.kb.se/wh5rw3kft0mf0vkc or just wh5rw3kft0mf0vkc")
+
     p_dates = sub.add_parser("fetch-dates",
         help="scrape exact publication dates from amazon.se (slow, needs playwright; run separately from update)")
     p_dates.add_argument("--limit", type=int, default=None, help="max number of books to process this run")
@@ -877,6 +930,8 @@ def main():
     args = parser.parse_args()
     if args.command == "update":
         cmd_update(args)
+    elif args.command == "add-libris":
+        cmd_add_libris(args)
     elif args.command == "fetch-dates":
         cmd_fetch_dates(args)
     elif args.command == "build":

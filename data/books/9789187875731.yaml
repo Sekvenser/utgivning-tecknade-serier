@@ -1,17 +1,20 @@
 id: '9789187875731'
 isbn: '9789187875731'
-title: 'Historier om Malmö'
+title: Historier om Malmö
 authors:
 - Krantz, Lars, 1979-
 - Brunnström, Pål, 1974-
 publisher: Kira förlag
-published_date: '2026-05-20'
 year: 2026
+published_date: '2026-05-20'
 language: swe
-description: 'I det här seriealbumet berättas Malmös historia från den färgstarka medeltiden till nutid. I vår stad har det alltid bott människor från olika länder och här får vi följa dem genom århundradena – vi går på sillamarknad, är med om dramatik under de skånska krigen, tågar med i rösträttsdemonstrationer och jublar på fotbollsmatcher i en stad som aldrig stått stilla.'
+description: I det här seriealbumet berättas Malmös historia från den färgstarka medeltiden till nutid.
+  I vår stad har det alltid bott människor från olika länder och här får vi följa dem genom århundradena
+  – vi går på sillamarknad, är med om dramatik under de skånska krigen, tågar med i rösträttsdemonstrationer
+  och jublar på fotbollsmatcher i en stad som aldrig stått stilla.
 cover_url: covers/9789187875731.jpg
 source_url: http://libris.kb.se/bib/k6m4mmrphph1hxfb
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789187875731
-hidden: false
 sources:
 - libris
+hidden: false

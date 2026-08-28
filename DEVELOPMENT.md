@@ -15,6 +15,15 @@ Fetches from:
 
 Re-running `update` merges new data in: existing `hidden` flags and any fields already filled in are kept, missing fields (e.g. a Libris-only book that GrandOcean also lists) get backfilled.
 
+## Adding a single title from Libris
+
+```
+python3 cli.py add-libris https://libris.kb.se/wh5rw3kft0mf0vkc
+python3 cli.py add-libris wh5rw3kft0mf0vkc   # a bare id works too
+```
+
+For adding one specific book without waiting on/re-running the full `update` scrape — e.g. one that `update`'s query doesn't catch (some children's/juvenile comics are catalogued by Libris under a different classification scheme entirely, keyed by subject rather than form, so they never match our `SAB:Hci`/`He.05` query no matter how it's tuned). Looks the record up via `xsearch?query=onr:<id>` (`onr` = Libris' object number, extracted from the URL) rather than fetching its JSON-LD directly — xsearch already resolves contributor names to clean strings, where the raw JSON-LD record often only links to *other*, unfetched Libris records for each author. Runs through the same `normalize_libris()`/`merge()` pipeline `update` uses, then immediately backfills a cover (Bokinfo, then Bokus) and a description (Libris' own summary) for just that one book. Safe to re-run — a second call updates the existing entry instead of duplicating it. Still needs `python3 cli.py build` afterwards, same as any other command that touches the yaml.
+
 ## Fetching exact publication dates
 
 ```
