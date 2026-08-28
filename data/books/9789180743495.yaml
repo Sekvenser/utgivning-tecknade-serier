@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: covers/bokinfo_9789180743495.jpg
 source_url: http://libris.kb.se/bib/pbmbkq5vm098vn6b
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180743495
 sources:
 - libris
 hidden: false

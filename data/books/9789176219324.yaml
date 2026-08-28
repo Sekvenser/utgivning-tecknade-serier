@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: covers/9789176219324.jpg
 source_url: http://libris.kb.se/bib/3l7zgfxh1wfxv8r1
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789176219324
 sources:
 - libris
 hidden: false

@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/hxthvk17fk7k26cg
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Katla%20%C2%B7%20Nr%201
 sources:
 - libris
 hidden: false

@@ -10,7 +10,6 @@ language: eng
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/dq9mxsfvbhl7nxwp
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Superman%20-%20Man%20of%20tomorrow
 sources:
 - libris
 hidden: true

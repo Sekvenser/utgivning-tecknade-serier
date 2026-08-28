@@ -10,7 +10,6 @@ language: eng
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/q3vrs8vznblr2x2k
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Fritz%20the%20cat
 sources:
 - libris
 hidden: true

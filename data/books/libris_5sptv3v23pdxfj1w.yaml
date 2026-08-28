@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/5sptv3v23pdxfj1w
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=En%20kortfattad%20ber%C3%A4ttelse%20om%20Stockholm%20i%20mitten%20av%2080-talet
 sources:
 - libris
 hidden: false

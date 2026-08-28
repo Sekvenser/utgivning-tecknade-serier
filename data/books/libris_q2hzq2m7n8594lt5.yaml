@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/q2hzq2m7n8594lt5
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=St%C3%A5lbj%C3%B6rnen%20-%20%C3%A5r%201
 sources:
 - libris
 hidden: false

@@ -11,7 +11,6 @@ language: swe
 description: Det faller monster från himlen och bara en ung trollkarl vet hur de kan besegras!
 cover_url: covers/9789180580014.jpg
 source_url: http://libris.kb.se/bib/jzwxb51zgsv8hnzv
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180580014
 sources:
 - libris
 hidden: false

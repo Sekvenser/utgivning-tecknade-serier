@@ -11,7 +11,6 @@ language: swe
 description: ''
 cover_url: covers/9789180742924.jpg
 source_url: http://libris.kb.se/bib/g18ddrf8d94fwwcm
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180742924
 sources:
 - libris
 hidden: false

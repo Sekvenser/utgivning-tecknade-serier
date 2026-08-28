@@ -10,7 +10,6 @@ language: eng, swe, dan, nor, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/4r5f8tvf2cd1h3bk
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Hopper%20and%20the%20secret%20of%20the%20groundhog
 sources:
 - libris
 hidden: true

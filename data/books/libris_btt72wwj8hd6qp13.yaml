@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/btt72wwj8hd6qp13
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Selma%20ber%C3%A4ttar
 sources:
 - libris
 hidden: false

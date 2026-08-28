@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/l4f7r3p7jhhqlkjs
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Memory%20foam
 sources:
 - libris
 hidden: false

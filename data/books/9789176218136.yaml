@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: covers/9789176218136.jpg
 source_url: http://libris.kb.se/bib/8pfjbvpc6rd3kl1t
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789176218136
 sources:
 - libris
 hidden: false

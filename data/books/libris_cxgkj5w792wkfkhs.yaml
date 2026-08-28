@@ -10,7 +10,6 @@ language: eng, swe, nor, dan, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/cxgkj5w792wkfkhs
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Paw%20Patrol%20-%20Rescue%20wheels
 sources:
 - libris
 hidden: true

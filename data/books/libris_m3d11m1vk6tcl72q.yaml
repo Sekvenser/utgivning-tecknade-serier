@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/m3d11m1vk6tcl72q
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Mal%20magasin%20%C2%B7%20%231%20%C2%B7%20M%C3%A5ste%20andra%20leva
 sources:
 - libris
 hidden: false

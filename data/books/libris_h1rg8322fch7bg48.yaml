@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/h1rg8322fch7bg48
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Diverse%20serier%20%3A%202017-2023%20ISH
 sources:
 - libris
 hidden: false

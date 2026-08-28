@@ -11,7 +11,6 @@ language: swe
 description: En spännande, medryckande, vemodig och varm bokserie där vår värld ses ur rävens perspektiv.
 cover_url: covers/9789180741873.jpg
 source_url: http://libris.kb.se/bib/k3scccpbhllz0jw9
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180741873
 sources:
 - libris
 hidden: false

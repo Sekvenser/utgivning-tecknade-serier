@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/bt8lf3x08kqpvfq8
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Kalles%20deckarpocket%20%C2%B7%20Den%20tredje%20s%C3%A4songen%2C%202
 sources:
 - libris
 hidden: false

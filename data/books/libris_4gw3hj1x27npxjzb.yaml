@@ -10,7 +10,6 @@ language: eng, swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/4gw3hj1x27npxjzb
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=LEGO%20DC%20Shazam%21%20-%20Magic%20and%20monsters
 sources:
 - libris
 hidden: true

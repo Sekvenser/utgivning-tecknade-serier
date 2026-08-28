@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/5mm6v8d63tnm388d
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=LasseMajas%20detektivbyr%C3%A5%20%3A%20samlade%20serier%20%C2%B7%203
 sources:
 - libris
 hidden: false

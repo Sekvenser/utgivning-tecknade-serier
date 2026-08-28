@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/r4kdd0xmphpbl93f
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Seriekonst%20%C2%B7%20Nummer%201.%202020.%20%C2%B7%20Serier%20fr%C3%A5n%20Sibirien
 sources:
 - libris
 hidden: false

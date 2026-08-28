@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: covers/978919875947158.jpg
 source_url: http://libris.kb.se/bib/s80rm10rqr0gm3nq
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=978919875947158
 sources:
 - libris
 hidden: false

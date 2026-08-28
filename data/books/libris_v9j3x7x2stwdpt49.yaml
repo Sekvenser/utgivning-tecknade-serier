@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/v9j3x7x2stwdpt49
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=G%C3%B6kboet%20%3A%20den%20kompletta%20samlingen%202020-2022
 sources:
 - libris
 hidden: true

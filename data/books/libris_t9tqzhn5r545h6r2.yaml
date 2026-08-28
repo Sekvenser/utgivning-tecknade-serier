@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/t9tqzhn5r545h6r2
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Walt%20Disney%27s%20Kalle%20Ankas%20Halloween
 sources:
 - libris
 hidden: false

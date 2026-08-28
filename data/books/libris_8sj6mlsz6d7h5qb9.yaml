@@ -12,7 +12,6 @@ description: Carmen frågar Valentina vad det blir för mat i kväll. Valentina 
   ber Carmen att inte laga för stark mat. Men då kommer Carmen på ett sätt att slippa laga fler middagar.
 cover_url: ''
 source_url: http://libris.kb.se/bib/8sj6mlsz6d7h5qb9
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Grannar%20%C2%B7%20Laga%20mat
 sources:
 - libris
 hidden: true

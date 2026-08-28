@@ -10,7 +10,6 @@ language: eng, swe, nor, dan, fin
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/bt09mg028dtqtzqj
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Migration
 sources:
 - libris
 hidden: true

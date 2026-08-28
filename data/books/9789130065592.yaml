@@ -14,7 +14,6 @@ description: Episk berättelse, i serieformat, från det småländska höglandet
   Erik publicerar sina alster i.
 cover_url: ''
 source_url: http://libris.kb.se/bib/dwltwcp4bjjr0m4v
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789130065592
 sources:
 - libris
 hidden: true

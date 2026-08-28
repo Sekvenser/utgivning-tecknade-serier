@@ -10,7 +10,6 @@ language: eng
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/l4f7rpnxj120lfsd
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Why%20do%20people%20cry%20at%20funerals%3F
 sources:
 - libris
 hidden: false

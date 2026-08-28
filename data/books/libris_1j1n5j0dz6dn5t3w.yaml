@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/1j1n5j0dz6dn5t3w
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Ingen%20brist%20p%C3%A5%20tankar
 sources:
 - libris
 hidden: false

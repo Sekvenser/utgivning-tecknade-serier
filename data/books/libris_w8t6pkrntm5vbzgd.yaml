@@ -13,7 +13,6 @@ description: Tecknad serie om Fjodor och hans vardag. Det är många frågor han
   för seende. Talboken läses med stöd av den digitala texten eller med den tryckta boken jämsides
 cover_url: ''
 source_url: http://libris.kb.se/bib/w8t6pkrntm5vbzgd
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Fjodor%20tar%20sig%20vatten%20%C3%B6ver%20huvudet
 sources:
 - libris
 hidden: true

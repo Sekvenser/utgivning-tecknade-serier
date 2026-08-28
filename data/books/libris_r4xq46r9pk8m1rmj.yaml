@@ -10,7 +10,6 @@ language: eng
 description: En äventyrs- och familjfilm producerad i Tyskland från 2019.
 cover_url: ''
 source_url: http://libris.kb.se/bib/r4xq46r9pk8m1rmj
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Bayala%20-%20a%20magical%20adventure
 sources:
 - libris
 hidden: true

@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/s6z6gtfbqtvrv8f2
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=St%C3%A5lbj%C3%B6rnen%20-%20kris%20i%20kubik
 sources:
 - libris
 hidden: false

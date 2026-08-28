@@ -11,7 +11,6 @@ language: swe
 description: ''
 cover_url: covers/9789189228849.jpg
 source_url: http://libris.kb.se/bib/2j6l6s4q091v61wg
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789189228849
 sources:
 - libris
 hidden: false

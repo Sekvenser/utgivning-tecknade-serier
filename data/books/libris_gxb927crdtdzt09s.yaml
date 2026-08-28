@@ -10,7 +10,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/gxb927crdtdzt09s
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Kalle%20och%20Hobbe%20%3A%20den%20kompletta%20samlingen%20%C2%B7%201992-1995%20%C2%B7%20bok%20fyra
 sources:
 - libris
 hidden: false

@@ -10,7 +10,6 @@ language: swe
 description: Ratata har en av huvudrollerna i detta äventyr om djurrättsaktivism i vilda västern.
 cover_url: covers/9789186783846.jpg
 source_url: http://libris.kb.se/bib/4ll4vksg27lz5dhj
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789186783846
 sources:
 - libris
 hidden: false

@@ -11,7 +11,6 @@ language: swe
 description: ''
 cover_url: covers/9789153122050.jpg
 source_url: http://libris.kb.se/bib/3qr6rxd51zqw7r5f
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789153122050
 buy_url: https://tecknaruppropet.se/order/p/historienomsverige
 sources:
 - libris

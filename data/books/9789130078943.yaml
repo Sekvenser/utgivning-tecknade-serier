@@ -14,7 +14,6 @@ description: 'Del 1 i serien Ella. Tecknad serie om Ella som är ny på skolan m
   texten eller med den tryckta boken jämsides.'
 cover_url: ''
 source_url: http://libris.kb.se/bib/k233kgqjh8zk8ng5
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789130078943
 sources:
 - libris
 hidden: true

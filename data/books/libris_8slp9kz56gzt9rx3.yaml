@@ -13,7 +13,6 @@ description: Plötsligt finns det ingen el i hela huset. Alla blir oroliga. Det 
   sjunger. När elen väl kommer tillbaka vill ingen gå in.
 cover_url: ''
 source_url: http://libris.kb.se/bib/8slp9kz56gzt9rx3
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Grannar%20%C2%B7%20Str%C3%B6mavbrott
 sources:
 - libris
 hidden: true

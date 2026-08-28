@@ -10,7 +10,6 @@ language: eng
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/s567sjc9qv2m3jsc
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Ben%2010%20versus%20the%20universe%3A%20the%20movie
 sources:
 - libris
 hidden: true

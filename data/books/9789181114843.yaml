@@ -2,11 +2,11 @@ id: '9789181114843'
 isbn: '9789181114843'
 title: 'Sekvenser #1 (vol. 2)'
 authors:
-- Schirén, Mikke
 - Crucifix, Benoît
 - Jonason, Magnus
-- Sullivan, Lucy
 - Passmore, Ben
+- Schirén, Mikke
+- Sullivan, Lucy
 publisher: Sekvenser
 year: 2025
 language: swe
@@ -15,4 +15,5 @@ description: 'I detta nummer: Intervjuer med serieskaparna Magnus Jonason och Lu
 cover_url: covers/sekvenser_1.jpg
 more_info_url: https://sekvenser.se/
 buy_url: https://sekvenser.se/
+sources: []
 hidden: false

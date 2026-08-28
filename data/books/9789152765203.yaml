@@ -15,7 +15,6 @@ description: 'För första gången kommer nu alla Medleysidospåren, samlade i e
   musik.'
 cover_url: covers/9789152765203.jpg
 source_url: http://libris.kb.se/bib/5q2938gc3tbdvr4v
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789152765203
 sources:
 - libris
 hidden: false

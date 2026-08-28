@@ -9,7 +9,6 @@ language: swe
 description: ''
 cover_url: ''
 source_url: http://libris.kb.se/bib/jx2h6ckfgm92zfpt
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=Bamse%20%3A%20en%20specialtidning%20om%20demokrati
 sources:
 - libris
 hidden: false

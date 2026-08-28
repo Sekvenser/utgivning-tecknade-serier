@@ -10,7 +10,6 @@ language: swe
 description: Rolig meta-serie om superhjälte! Den enda sanna serietidnings-superhjälten!
 cover_url: covers/9789176215807.jpg
 source_url: http://libris.kb.se/bib/2d2qsgz6087mzf8n
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789176215807
 sources:
 - libris
 hidden: false
