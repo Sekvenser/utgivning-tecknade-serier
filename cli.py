@@ -38,6 +38,7 @@ import yaml
 BOOKS_DIR = "data/books"
 JSON_OUTPUT_PATH = "data/books.json"
 BOOK_PAGES_DIR = "data/book"
+SITEMAP_PATH = "data/sitemap.xml"
 SITE_URL = "https://serieutgivning.sekvenser.se"
 DEFAULT_OG_DESCRIPTION = "Ett register över svenska tecknade serier och serieromaner, utgivna sedan 2020."
 START_YEAR = 2020
@@ -695,6 +696,60 @@ def build_book_pages(books_dir, pages_dir, template_path="web/index.html", site_
             f.write(page)
 
 
+# sitemaps.org protocol: max 50,000 <url> entries (and 50MB uncompressed) per
+# sitemap file. Nowhere near that today (~1700 books), but if it's ever
+# exceeded this splits into numbered sitemap-N.xml files plus a <sitemapindex>
+# written to the usual sitemap.xml path, instead of producing an invalid file.
+SITEMAP_MAX_URLS = 50000
+
+
+def _write_urlset(path, urls):
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, lastmod in urls:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{html.escape(loc)}</loc>")
+        if lastmod:
+            lines.append(f"    <lastmod>{lastmod}</lastmod>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def build_sitemap(books_dir, sitemap_path, site_url=SITE_URL):
+    store = load_store(books_dir)
+    urls = [(f"{site_url}/", None)]
+    for book in store.values():
+        if book.get("hidden"):
+            continue  # hidden from the site itself -- don't invite crawlers to it either
+        urls.append((f"{site_url}/book/{book_slug(book['id'])}/", (book.get("added_at") or "")[:10] or None))
+
+    chunks = [urls[i:i + SITEMAP_MAX_URLS] for i in range(0, len(urls), SITEMAP_MAX_URLS)]
+    out_dir = os.path.dirname(sitemap_path) or "."
+    os.makedirs(out_dir, exist_ok=True)
+
+    if len(chunks) == 1:
+        _write_urlset(sitemap_path, chunks[0])
+        return
+
+    sitemap_names = []
+    for i, chunk in enumerate(chunks, 1):
+        name = f"sitemap-{i}.xml"
+        _write_urlset(os.path.join(out_dir, name), chunk)
+        sitemap_names.append(name)
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for name in sitemap_names:
+        lines.append("  <sitemap>")
+        lines.append(f"    <loc>{html.escape(site_url)}/data/{name}</loc>")
+        lines.append("  </sitemap>")
+    lines.append("</sitemapindex>")
+    with open(sitemap_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
 # MTM (Myndigheten för tillgängliga medier) editions are talking-book /
 # accessible-media reissues, not original comics releases -- hidden by
 # default. Publisher text varies ("Inläst för Myndigheten för tillgängliga
@@ -898,6 +953,8 @@ def cmd_build(args):
     print(f"Wrote {args.json_out}", file=sys.stderr)
     build_book_pages(args.data, BOOK_PAGES_DIR)
     print(f"Wrote per-book pages to {BOOK_PAGES_DIR}", file=sys.stderr)
+    build_sitemap(args.data, SITEMAP_PATH)
+    print(f"Wrote {SITEMAP_PATH}", file=sys.stderr)
 
 
 def main():
