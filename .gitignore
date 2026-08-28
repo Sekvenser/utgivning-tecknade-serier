@@ -3,3 +3,4 @@ web/book
 *.pyc
 data/books.json
 data/book/
+data/sitemap*.xml
