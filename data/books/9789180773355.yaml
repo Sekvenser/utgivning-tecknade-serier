@@ -1,13 +1,14 @@
-id: '9789180773355'
-isbn: '9789180773355'
-title: Uppslukad
+id: "9789180773355"
+isbn: "9789180773355"
+title: Krypto - Uppslukad
 authors:
-- Sandnes, Hans Jørgen
-publisher: 'Lund : Nypon förlag'
+  - Sandnes, Hans Jørgen
+publisher: "Nypon förlag"
 year: 2024
-published: '[2024]'
+published: "[2024]"
 language: swe
-description: Ett sjömonster förstör fiskebåtarna i Saltvik och lille Krako får skulden. Fiskarna tror
+description:
+  Ett sjömonster förstör fiskebåtarna i Saltvik och lille Krako får skulden. Fiskarna tror
   att han är farlig och vill bli av med honom. Men Ofelia vet att det inte kan vara Krako som förstör
   båtarna. Det måste vara ett större sjömonster. Hon tar sig ner i djupet och upptäcker att det inte finns
   några fiskar där...
@@ -15,6 +16,6 @@ cover_url: covers/9789180773355.jpg
 source_url: http://libris.kb.se/bib/zh98g0s1wdl4x2q0
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180773355
 sources:
-- libris
+  - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'
+added_at: "2026-08-24T14:44:26+00:00"

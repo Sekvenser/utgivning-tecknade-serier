@@ -2,17 +2,19 @@ id: '9789198124569'
 isbn: '9789198124569'
 title: 'Home Made Comics #20'
 authors:
-- Forsblad, Ola
+  - Forssblad, Ola m.fl.
 publisher: Home Made Comics
 year: 2026
+published_date: "2026-05-16"
 language: swe
-description: 'Home Made Comics #20 är för dig som vill läsa serier med taktlösa synthare, bastubadande
+description:
+  "Home Made Comics #20 är för dig som vill läsa serier med taktlösa synthare, bastubadande
   machomän, pruttande apor, sammansatta ordvitsar, kolorerad färglära, elektriska ungar, historiska mumsare,
   goda råd, glupska brunnsålar, livfulla flyttminnen, märkliga bullstölder, pälsklädda bibliotekarier,
   ordlösa dystopier, postkoloniala reseskildringar, poetiska hyllningar, åtråvärda låtsasdjur, sinnesslöa
   Tintin-fantaster, mysterielösande rulltårteforskare, fördomsfulla barberare, slampskammande morsor,
   sjuka kunder, tveksam ikonografi, wildstylade brandfacklor, rara kaniner, barnsliga övergrepp, frågvisa
-  Yoko-fans, heta slutgörningstips och sprängkåta präster.'
+  Yoko-fans, heta slutgörningstips och sprängkåta präster."
 cover_url: covers/hmc_20.png
 more_info_url: https://www.homemadecomics.org/
 buy_url: https://www.homemadecomics.org/butik/home-made-comics-20

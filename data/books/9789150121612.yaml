@@ -1,19 +1,20 @@
-id: '9789150121612'
-isbn: '9789150121612'
+id: "9789150121612"
+isbn: "9789150121612"
 title: Vita lögner, röda hjärtan
 authors:
-- Dåsnes, Nora, 1995-
-publisher: 'Stockholm : Alfabeta'
+  - Dåsnes, Nora, 1995-
+publisher: "Stockholm : Alfabeta"
 year: 2021
-published: '[2021]'
-published_date: '2021-05-05'
+published: "[2021]"
+published_date: "2021-05-05"
 language: swe
-description: Träffsäker grafisk roman för mellanåldern om vänskap och den första förvirrade förälskelsen. »En
+description:
+  Träffsäker grafisk roman för mellanåldern om vänskap och den första förvirrade förälskelsen. »En
   bok som berör.« VÅRT LAND
 cover_url: covers/9789150121612.jpg
 source_url: http://libris.kb.se/bib/5jrh7llk32633fv1
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789150121612
 sources:
-- libris
+  - libris
 hidden: false
-added_at: '2026-08-24T14:44:26+00:00'
+added_at: "2026-08-24T14:44:26+00:00"
