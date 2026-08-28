@@ -3,6 +3,7 @@ isbn: '9789180743570'
 title: Kalle Ankas Pocket - Europaresor 3 Frankrike
 authors:
 - Disney
+- Olausson, Kaija
 publisher: Egmont
 year: 2026
 published: '2026'
@@ -13,6 +14,7 @@ source_url: https://www.grandocean.se/shop/10-allaalders/12212-kalle-ankas-pocke
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789180743570
 sources:
 - grandocean
+- libris
 grandocean_id: 12212
 hidden: false
 added_at: '2026-08-25T15:00:24+00:00'

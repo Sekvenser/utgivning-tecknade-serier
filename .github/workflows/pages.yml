@@ -18,21 +18,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.x"
       - run: pip install -r requirements.txt
       - run: python3 cli.py build
-      - name: Assemble site (web/ at the root, data/ alongside it)
+      - name: Assemble site (web/ at the root, data/ + book/ alongside it)
         run: |
           mkdir -p _site
           cp -r web/. _site/
-          rm -rf _site/data          # drop the local-dev symlink (or its dereferenced copy)
+          rm -rf _site/data _site/book   # drop the local-dev symlinks (or their dereferenced copies)
           mkdir -p _site/data
           cp data/books.json _site/data/
           cp -r data/covers _site/data/covers
-      - uses: actions/upload-pages-artifact@v3
+          cp -r data/book _site/book
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -44,4 +45,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
