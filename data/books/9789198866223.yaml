@@ -2,8 +2,9 @@ id: '9789198866223'
 isbn: '9789198866223'
 title: Claes Reimerthi – En Lågmäld Hjälte
 authors:
-- Strömberg, Fredrik, 1968-
 - Reimerthi, Claes, 1955-2021
+- Strömberg, Fredrik, 1968-
+- Strömberg, Hanna, 1974-
 publisher: Seriearkivet
 year: 2025
 published: '[2025]'
@@ -16,6 +17,9 @@ description: 'Manusförfattaren och seriehistorikern Claes Reimerthi gick bort a
   Boken samlar texter om, av och med Claes, inte minst hyllningar i text och bild av de många personer
   som samarbetade med Claes någon gång under hans långa och varierande karriär.'
 cover_url: covers/9789198866346.jpg
-bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198866346
+source_url: http://libris.kb.se/bib/xfc0h0f1vj3rrmff
+bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198866223
 buy_url: https://www.seriearkivet.se/product/claes-reimerthi-en-lagmald-hjalte/
+sources:
+- libris
 hidden: false

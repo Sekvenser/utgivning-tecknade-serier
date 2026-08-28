@@ -1,17 +1,17 @@
-id: "9789198502572"
-isbn: "9789198502572"
-title: "Serien om seriestaden · #1 · Serier är också konst. 1996-1998"
+id: '9789198502572'
+isbn: '9789198502572'
+title: 'Serien om seriestaden · #1 · Serier är också konst. 1996-1998'
 authors:
-  - Krantz, Gunnar, 1962-
-publisher: "[Malmö] : [Seriekonst/Gunnar Krantz]"
+- Krantz, Gunnar, 1962-
+publisher: '[Malmö] : [Seriekonst/Gunnar Krantz]'
 year: 2025
-published: "[2025]"
+published: '[2025]'
 language: swe
-description: ""
-cover_url: "covers/9789198502572.jpg"
+description: ''
+cover_url: covers/9789198502572.jpg
 source_url: http://libris.kb.se/bib/xk9dsp91v45jv45m
 bokus_search_url: https://www.bokus.com/cgi-bin/product_search.cgi?ac_used=no&search_word=9789198502572
 sources:
-  - libris
+- libris
 hidden: false
-added_at: "2026-08-24T14:44:26+00:00"
+added_at: '2026-08-24T14:44:26+00:00'
