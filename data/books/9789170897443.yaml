@@ -7,7 +7,6 @@ authors:
 publisher: 'Stockholm : Epix'
 year: 2026
 published: '[2026]'
-buy_url: https://www.epix.se/serieromaner/den-sista-tagningen.html
 language: swe
 description: 'En fängslande berättelse om nazismens sista månader och den tunna linjen mellan överlevnad
   och moralisk kompromiss. Sensommaren 1944: Nazitysklands huvudstad Berlin ligger i ruiner. Den regimkritiska
@@ -15,6 +14,7 @@ description: 'En fängslande berättelse om nazismens sista månader och den tun
   för en propagandafilm. Han accepterar för att slippa bli kanonmat i nazisternas sista försvarsuppbåd.'
 cover_url: covers/9789170897443.jpg
 source_url: http://libris.kb.se/bib/5sd26z7c384zhjch
+buy_url: https://www.epix.se/serieromaner/den-sista-tagningen.html
 sources:
 - grandocean
 - libris

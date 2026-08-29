@@ -7,7 +7,6 @@ authors:
 publisher: 'Stockholm : Epix'
 year: 2026
 published: '[2026]'
-buy_url: https://www.epix.se/serieromaner/babels-vag.html
 language: swe
 description: 'Världen har drabbats av ett datavirus som verkar omöjligt att stoppa. Banker töms på pengar,
   elnät slocknar och sjukhusjournaler försvinner. Det enda alla vet är att inget uppkopplat längre går
@@ -15,6 +14,7 @@ description: 'Världen har drabbats av ett datavirus som verkar omöjligt att st
   möjlighet: att ge sig ut på den nybyggda väg som i folkmun kallas» Babels väg«.'
 cover_url: covers/9789170897382.jpg
 source_url: http://libris.kb.se/bib/wj4kt9k6trj5gg8s
+buy_url: https://www.epix.se/serieromaner/babels-vag.html
 sources:
 - grandocean
 - libris

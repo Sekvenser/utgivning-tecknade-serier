@@ -6,7 +6,6 @@ authors:
 publisher: Epix
 year: 2026
 published: '2026'
-buy_url: https://www.epix.se/de-senaste-bockerna/mina-demoner.html
 language: swe
 description: 'Förra året fick illustratören Nicolas Krizan ett oväntat uppdrag från sin förlagsredaktör:
   "Skulle det inte vara en tanke att göra en bok med demoner?" Resultatet är ett personligt bestiarium
@@ -41,6 +40,7 @@ description: 'Förra året fick illustratören Nicolas Krizan ett oväntat uppdr
   En bilderbok, nog mer för vuxna än för barn.'
 cover_url: covers/9789170894695.jpg
 source_url: https://www.grandocean.se/shop/20-bocker/12206-mina-demoner-/
+buy_url: https://www.epix.se/de-senaste-bockerna/mina-demoner.html
 sources:
 - grandocean
 grandocean_id: 12206
