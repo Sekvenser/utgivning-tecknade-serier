@@ -10,7 +10,7 @@ language: swe
 description: Marvels Universum blir julalbum och i den första utgåvan blir det premiär för Miles Morales
   som Spider-Man för första gången på svenska! Dessutom en kort bonusberättelse med Photon av Maria Frölich,
   den första svenska serieskaparen som gjort serier för Marvel!
-cover_url: covers/9789198991703.webp
+cover_url: covers/9789198991703.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12254-marvels-universum-julspecial-2026/
 sources:
 - grandocean
