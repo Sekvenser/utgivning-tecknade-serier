@@ -7,7 +7,6 @@ authors:
 publisher: 'Stockholm : Epix'
 year: 2026
 published: '[2026]'
-buy_url: https://www.epix.se/humor/johan-andreasson-snoar-in-pa-det-tjugonde-arhundradet.html
 language: swe
 description: 'Välkommen till 1980-talet – en tid när allt verkade möjligt. I den här boken samlar Johan
   Andreasson serier, illustrationer och upptåg från sina första år som tecknare: från fanzin och dagspress
@@ -15,6 +14,7 @@ description: 'Välkommen till 1980-talet – en tid när allt verkade möjligt. 
   personlig och ibland absurd inblick i ett vilt och formativt decennium i den svenska seriekulturen.'
 cover_url: covers/9789170897412.jpg
 source_url: http://libris.kb.se/bib/l7vl61j4jhq61t7s
+buy_url: https://www.epix.se/humor/johan-andreasson-snoar-in-pa-det-tjugonde-arhundradet.html
 sources:
 - grandocean
 - libris

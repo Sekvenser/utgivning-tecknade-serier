@@ -7,7 +7,6 @@ authors:
 publisher: 'Stockholm : Epix'
 year: 2026
 published: '[2026]'
-buy_url: https://www.epix.se/serieromaner/vilsna-hundar.html
 language: swe
 description: Elisa Rossholm tolkar Katherine Mansfields noveller Je ne parle pas français och Dockskåpet.
   Mansfield är en av modernismens främsta novellister, känd för sin blick för sociala strukturer och mänskliga
@@ -15,6 +14,7 @@ description: Elisa Rossholm tolkar Katherine Mansfields noveller Je ne parle pas
   i utkanten av gemenskapen, präglade av missförstånd och osynliga men kännbara gränser.
 cover_url: covers/9789170897405.jpg
 source_url: http://libris.kb.se/bib/m8vjnfn8k3456jpt
+buy_url: https://www.epix.se/serieromaner/vilsna-hundar.html
 sources:
 - grandocean
 - libris

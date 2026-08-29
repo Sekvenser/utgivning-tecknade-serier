@@ -1,12 +1,11 @@
 id: '9789170897207'
 isbn: '9789170897207'
-title: "Sex - en otrolig historia volym 1 - Västvärlden"
+title: Sex - en otrolig historia volym 1 - Västvärlden
 authors:
 - Brenot, Philippe
 - Coryn, Laetitia
 publisher: Epix
 year: 2026
-buy_url: https://www.epix.se/serieromaner/sex-en-otrolig-historia-vastvarlden.html
 published: '2026'
 language: swe
 description: 'Hur har människan hanterat sex genom tiderna? En informativ och underhållande rundmålning.
@@ -26,6 +25,7 @@ description: 'Hur har människan hanterat sex genom tiderna? En informativ och u
   Kyrkans långa välde, Upplysningen, 1800-talet, 1900-talet och 2000-talet (internet, robotar och framtidssex).'
 cover_url: covers/9789170897207.jpg
 source_url: https://www.grandocean.se/shop/9-vuxen/12203-sex--en-otrolig-historia-volym-1---vastvarlden/
+buy_url: https://www.epix.se/serieromaner/sex-en-otrolig-historia-vastvarlden.html
 sources:
 - grandocean
 grandocean_id: 12203
