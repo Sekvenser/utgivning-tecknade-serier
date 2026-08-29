@@ -11,7 +11,7 @@ language: swe
 description: En färgsprakande presentbok till alla Heartstopper-fans!Årsboken innehåller massor av kul
   läsning, miniserier och extramaterial. Dessutom berättar Alice Oseman hela historien om Heartstopper,
   från de första skisserna på Nick och Charlie 2013 sedan fram till årets Netflixserie.
-cover_url: covers/9789180580120.jpg
+cover_url: covers/9789180580120.webp
 source_url: http://libris.kb.se/bib/jzcd4mjlggq6ccwb
 sources:
 - libris

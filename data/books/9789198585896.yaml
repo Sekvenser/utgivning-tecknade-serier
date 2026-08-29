@@ -10,7 +10,7 @@ language: swe
 description: Joe Kesslers första serieroman är en vindlande, färgrik, stum fabel om en liten pojke som
   förföljs av en mystisk måsvarrelse. Kessler går ännu längre än han gjort tidigare vad gäller att utforska
   den tecknade serieformens yttersta gränsmarker.
-cover_url: covers/9789198585896.jpg
+cover_url: covers/9789198585896.webp
 source_url: http://libris.kb.se/bib/8nxxv9056zt9q11j
 sources:
 - libris

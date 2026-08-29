@@ -11,7 +11,7 @@ language: swe
 description: Berättelsen från filmen "The Nightmare Before Christmas" i serieversion. Återupplev hur Jack
   Skellington från Halloweentown upptäcker och blir besatt av julens glädje, vilket leder till kaos när
   han försöker ta över julfirandet
-cover_url: covers/9789180741958.jpg
+cover_url: covers/9789180741958.webp
 source_url: http://libris.kb.se/bib/m5vbwn19kz03q86t
 sources:
 - libris

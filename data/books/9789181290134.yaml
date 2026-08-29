@@ -10,7 +10,7 @@ language: swe
 description: 91:ans mästerverk är bokserien som hyllar tidningen 91:an och de serieskapare som skapar
   våra berättelser. Varje bok presenterar utvalda favoritserier av en enskild tecknare – berättelser som
   fått oss att skratta och som etsat sig fast i minnet. Detta är den första delen i bokserien 91:an Mästerverk.
-cover_url: covers/bokinfo_9789181290134.jpg
+cover_url: covers/bokinfo_9789181290134.webp
 source_url: http://libris.kb.se/bib/h3dbgxs6fk9xgx9n
 sources:
 - libris

@@ -11,7 +11,7 @@ language: swe
 description: Boken innehåller en samling serier från många olika länder och tidsperioder, skrivna och
   tecknade av en rad olika författare, allt för att visa figurens mångsidighet och utveckling genom åren.
   Boken innehåller även redaktionella artiklar och helsidesillustrationer av allas vår favoritanka.
-cover_url: covers/9789180740852.jpg
+cover_url: covers/9789180740852.webp
 source_url: http://libris.kb.se/bib/q78k6f7xn6lzr6n0
 sources:
 - libris

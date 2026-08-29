@@ -10,7 +10,7 @@ language: swe
 description: Ännu en bilderbok av satirtecknaren Ulf Ivar Nilsson där han sticker sin vassa tuschpenna
   i sådana som förespråkar rasism och andra dumheter. Även miljöfrågor intresserar honom liksom jämställdhet
   och funderingar kring människors villkor.
-cover_url: covers/bokinfo_9789198025897.jpg
+cover_url: covers/bokinfo_9789198025897.webp
 source_url: http://libris.kb.se/bib/j5pp8944gxxwhcfw
 sources:
 - libris

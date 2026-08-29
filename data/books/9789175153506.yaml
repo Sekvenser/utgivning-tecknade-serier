@@ -10,7 +10,7 @@ language: swe
 description: Serieversionen av Philip Pullmans fantasymästerverk Guldkompassen vänder sig lika mycket
   till nya läsare som till fans av originaltrilogin. I det tredje och avslutande albumet fortsätter Lyras
   färd mot Svalbard och pansarbjörnarnas rike.
-cover_url: covers/9789175153506.jpg
+cover_url: covers/9789175153506.webp
 source_url: http://libris.kb.se/bib/nzfv8n9gl9shwdjm
 sources:
 - libris

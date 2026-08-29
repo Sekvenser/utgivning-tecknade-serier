@@ -10,7 +10,7 @@ language: swe
 description: Disneyserierna har en lång tradition av parodier på klassiska litterära romaner. Därför har
   vi lanserat denna bokserie, som samlar de bästa parodierna med Kalle Anka, Musse Pigg och våra andra
   hjältar i huvudrollerna.
-cover_url: covers/9789176215524.jpg
+cover_url: covers/9789176215524.webp
 source_url: http://libris.kb.se/bib/cpzpqrsg9p17krk2
 sources:
 - libris

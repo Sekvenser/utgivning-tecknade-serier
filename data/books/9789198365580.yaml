@@ -10,7 +10,7 @@ language: swe
 description: Året är 1988 och Tomas är 16 år. När han börjar på en fotoskola inne i stan öppnar sig världen.
   Samtidigt förändras synthmusiken, och med nya vänner kommer nya influenser. Tomas vill ha en flickvän,
   men mest av allt vill han vara extrem ...
-cover_url: covers/9789198365580.jpg
+cover_url: covers/9789198365580.webp
 source_url: http://libris.kb.se/bib/m1pkffm3kt4219ks
 sources:
 - libris

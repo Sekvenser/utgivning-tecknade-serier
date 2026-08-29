@@ -11,7 +11,7 @@ language: swe, fin
 description: Den här boken handlar om några av breven som skrevs mellan en mor i Finland och hennes dotter
   i Sverige. Den handlar om saknad och om längtan, den handlar om den som lämnade, och om den som blev
   kvar.
-cover_url: covers/9789188453761.jpg
+cover_url: covers/9789188453761.webp
 source_url: http://libris.kb.se/bib/v9zp8h68s7cl3jzb
 sources:
 - libris

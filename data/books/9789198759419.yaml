@@ -10,7 +10,7 @@ language: swe
 description: I sin debutserieroman skildrar Johan Ingemarsson en helgresa till Oslo med buss tillsammans
   med en kompis. De är båda i yngre medelåldern och försöker desperat hänga kvar i sina identiteter som
   unga partykillar. Det går så där.
-cover_url: covers/9789198759419.jpg
+cover_url: covers/9789198759419.webp
 source_url: http://libris.kb.se/bib/8p64bqdp6bh64gsm
 sources:
 - libris

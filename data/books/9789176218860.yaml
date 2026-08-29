@@ -10,7 +10,7 @@ language: swe
 description: En storm sveper fjortonåriga Sora till en mystisk värld där han träffar magikern Kalle Anka
   och riddaren Långben. Tillsammans ger de sig ut på ett äventyr i hopp om att hitta den försvunna kungen
   Musse Pigg!
-cover_url: covers/9789176218860.jpg
+cover_url: covers/9789176218860.webp
 source_url: http://libris.kb.se/bib/5lfzzkcs3flwspzd
 sources:
 - libris

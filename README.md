@@ -32,7 +32,7 @@ buy_url: https://exempel.se/kop
 
 Om det inte finns en webbplats att köpa ifrån, och det fortfarande går att köpa utgåvan, lägg in i beskrivningstexten (description) hur man gör.
 
-**3. Lägg till ett omslag** (valfritt): spara bildfilen i `data/covers/`, t.ex. `data/covers/mitt-fanzin-3.jpg`, och peka på den med `cover_url: covers/mitt-fanzin-3.jpg` ovan.
+**3. Lägg till ett omslag** (valfritt): spara bildfilen i `data/covers/`, t.ex. `data/covers/mitt-fanzin-3.jpg`. Kör sedan `python3 cli.py optimize-covers data/covers/mitt-fanzin-3.jpg` för att konvertera den till `.webp` (mindre filstorlek), och peka på den nya filen med `cover_url: covers/mitt-fanzin-3.webp` ovan.
 
 **4. Skicka en pull request** med den nya filen (och ev. omslagsbilden).
 

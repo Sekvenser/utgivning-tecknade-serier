@@ -11,7 +11,7 @@ language: swe
 description: Äntligen samlas den efterlängtade serien Freddie på Firefoot som album! I första volymen
   hittar du de åtta första delarna i följetongen som publicerades under totalt 15 års tid i tidningen
   Min Häst kring millennieskiftet.
-cover_url: covers/9789180740302.jpg
+cover_url: covers/9789180740302.webp
 source_url: http://libris.kb.se/bib/gx55bmvkd85bgtcd
 sources:
 - libris

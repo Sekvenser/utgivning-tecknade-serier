@@ -12,7 +12,7 @@ language: swe
 description: Mordet på Olof Palme är en serieroman som visar hur Stig Engström ("Skandiamannen") planerade
   och utförde mordet på Olof Palme. Serien bygger på en animerad kortfilm. I boken ingår även en fristående
   textdel om mordutredningen.
-cover_url: covers/9789198897807.jpg
+cover_url: covers/9789198897807.webp
 source_url: http://libris.kb.se/bib/r8mfkvqdpwn72t25
 sources:
 - libris

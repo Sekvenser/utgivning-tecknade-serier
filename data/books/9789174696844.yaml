@@ -11,7 +11,7 @@ language: swe
 description: Tre klassiska skräckberättelser i en inbunden seriebok! Dracula, Frankenstein och Baskervilles
   hund återberättas i spännande grafiska tolkningar med pratbubblor och effekter. Illustrerad av Anthony
   Williams och återberättad av Clare Bampton – perfekt för skräckälskare.
-cover_url: covers/9789174696844.jpg
+cover_url: covers/9789174696844.webp
 source_url: http://libris.kb.se/bib/tf77f6rrr66j4nnw
 sources:
 - libris

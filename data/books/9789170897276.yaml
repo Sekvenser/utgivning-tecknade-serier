@@ -10,7 +10,7 @@ language: swe
 description: En suggestiv tolkning av första boken i Elena Ferrantes världsberömda Neapelkvartett om två
   kvinnors komplexa och ibland konfliktfyllda vänskap. Denna första del i serien följer Lila och Lenù
   från deras möte som sexåringar genom skolåren och upp i tonåren.
-cover_url: covers/bokinfo_9789170897276.jpg
+cover_url: covers/bokinfo_9789170897276.webp
 source_url: http://libris.kb.se/bib/2lg4w0650d8t3spt
 sources:
 - libris

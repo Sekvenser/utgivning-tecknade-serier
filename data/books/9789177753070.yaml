@@ -11,7 +11,7 @@ language: swe
 description: Äntligen kommer Diskbänkstecknaren i bokform! Ulrika Linder tecknar småbarnslivet med säker
   hand, en stor portion humor, kärlek och frustration. De flesta teckningar är gjorda på gamla fönsterkuvert,
   broschyrer eller vad som kan tänkas finnas till hands.
-cover_url: covers/9789177753070.jpg
+cover_url: covers/9789177753070.webp
 source_url: http://libris.kb.se/bib/k1mfxxqwh89mvph4
 sources:
 - libris
