@@ -10,7 +10,7 @@ language: swe
 description: '"Taggig" är en "komma ut"-berättelse om en i litteraturen gömd och bortvald erfarenhet,
   som visar familjen och vännernas viktiga roll för transprocessen och att de, liksom huvudpersonen, för
   alltid kommer att förändras av den.'
-cover_url: covers/9789189924208.jpg
+cover_url: covers/9789189924208.webp
 source_url: http://libris.kb.se/bib/zjx7bd4sw14jrtj9
 sources:
 - libris

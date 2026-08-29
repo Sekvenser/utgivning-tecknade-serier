@@ -10,7 +10,7 @@ language: swe
 description: Kalle Anka och hans vänner i Ankeborg bjuder här på sina bästa recept. Och medan du väntar
   på att maten ska bli klar, finns det en massa rolig serieläsning som knyter an till varje recept på
   ett underhållande sätt
-cover_url: covers/9789176216125.jpg
+cover_url: covers/9789176216125.webp
 source_url: http://libris.kb.se/bib/mz7z012xk5jz220s
 sources:
 - libris

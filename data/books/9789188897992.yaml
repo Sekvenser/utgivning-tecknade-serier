@@ -11,7 +11,7 @@ language: swe
 description: Lisbeth Salander efterlyst för mord! Mikael Blomkvist är tillbaka på Millennium och förbereder
   publiceringen av en serie reportage som kartlägger sexhandeln mellan Östeuropa och Sverige. Först då
   de två grävande journalisterna hittas mördade inser Mikael sprängkraften i avslöjandet.
-cover_url: covers/9789188897992.jpg
+cover_url: covers/9789188897992.webp
 source_url: http://libris.kb.se/bib/s756lf9lqld1p2wz
 sources:
 - libris

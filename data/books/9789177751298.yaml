@@ -10,7 +10,7 @@ language: swe
 description: Coco är en 48-årig serietecknare som plötsligt inte kan rita längre. Mörkt album är en smärtsam
   och rolig bok om att hitta sin väg. Om en man som kollapsar, ett barn som vägrar äta, en misslyckad
   akvarellkurs och plötslig skaparglädje. Och om att hysa en osund fixering vid mordfall.
-cover_url: covers/9789177751298.jpg
+cover_url: covers/9789177751298.webp
 source_url: http://libris.kb.se/bib/jvzngpt6g0ptsqrn
 sources:
 - libris

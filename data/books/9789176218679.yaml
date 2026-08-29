@@ -10,7 +10,7 @@ language: swe
 description: Kalle Lind och Jimmy Wallin levererar en tredje följetong av Statarna, bokserien som utspelar
   sig i ett Sverige där statare levde som livegna på svenska ägor. Statarna är en blandning av humor,
   spänning och nutidshistoria.
-cover_url: covers/9789176218679.jpg
+cover_url: covers/9789176218679.webp
 source_url: http://libris.kb.se/bib/q50jj4v6nq9lqpbr
 sources:
 - libris

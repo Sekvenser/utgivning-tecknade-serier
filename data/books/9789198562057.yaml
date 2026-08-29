@@ -11,7 +11,7 @@ language: swe
 description: Välkommen till Cypress! En privat polismyndighet i efterlivet som anställer de döda för att
   bekämpa brott. Chie är en ung tjej som nyligen gått bort och ska tränas av veteranen Jon. Detta är inte
   alls vad hon förväntade sig i efterlivet och vad förväntar det sig av henne egentligen?
-cover_url: covers/9789198562057.jpg
+cover_url: covers/9789198562057.webp
 source_url: http://libris.kb.se/bib/0fh6l3gqx0crb68m
 sources:
 - libris

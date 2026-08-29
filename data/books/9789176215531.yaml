@@ -10,7 +10,7 @@ language: swe
 description: Invånarna i Ankeborg är en samling färgstarka personligheter. I den här boken samlar vi serier
   om alla de karakteristiska figurerna och deras unika karaktärsdrag för att förklara vem som är vem i
   Ankeborg.
-cover_url: covers/9789176215531.jpg
+cover_url: covers/9789176215531.webp
 source_url: http://libris.kb.se/bib/z8rc3l9kwgxrzs5q
 sources:
 - libris

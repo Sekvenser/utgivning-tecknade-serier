@@ -10,7 +10,7 @@ language: swe
 description: I femton personliga berättelser skildrar den franska serieskaparen Pénélope Bagieu avgörande
   händelser från sin uppväxt fram till vuxen ålder. I lager på lager samlas insikter och erfarenheter
   som tillsammans ger en bild av författaren och visar vad som har format henne till den hon är i dag.
-cover_url: covers/9789175154046.jpg
+cover_url: covers/9789175154046.webp
 source_url: http://libris.kb.se/bib/0f2mtvq2xp03x77l
 sources:
 - libris

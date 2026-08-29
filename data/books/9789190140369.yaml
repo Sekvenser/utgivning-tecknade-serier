@@ -10,7 +10,7 @@ language: swe
 description: Bob vaknar vrålhungrig – men det är bara början på en dag som spårar ut totalt. Mellan märkliga
   utomjordingar, knasiga missförstånd och hisnande rymdlandskap väntar ett äventyr som är lika hysteriskt
   roligt som det är farligt.
-cover_url: covers/bokinfo_9789190140369.jpg
+cover_url: covers/bokinfo_9789190140369.webp
 source_url: http://libris.kb.se/bib/0m4zpq0fx6f217wb
 sources:
 - libris

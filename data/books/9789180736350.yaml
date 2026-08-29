@@ -11,7 +11,7 @@ language: swe
 description: 'Den mystiska fabriken är ett klassiskt serieäventyr, fullspäckat med spännande karaktärer.
   Historiens huvudperson är Nellie: en ung, nyfiken och modig flicka som alltid är redo att kasta sig
   ut på äventyr.'
-cover_url: covers/9789180736350.jpg
+cover_url: covers/9789180736350.webp
 source_url: http://libris.kb.se/bib/cwfzwllw9nkxbh2l
 sources:
 - libris

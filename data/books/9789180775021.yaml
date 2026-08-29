@@ -10,7 +10,7 @@ language: swe
 description: Herkules är den främsta grekiska hjälten - om du frågar honom själv. Men när han besöker
   oraklet i Delfi, får han veta att han måste utföra en rad farliga uppdrag. Och det värsta är att uppdragen
   ska utföras på begäran av hans listiga kusin...
-cover_url: covers/9789180775021.jpg
+cover_url: covers/9789180775021.webp
 source_url: http://libris.kb.se/bib/xh09w5dnvf4wb1gv
 sources:
 - libris

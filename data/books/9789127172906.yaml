@@ -10,7 +10,7 @@ language: swe
 description: En grafisk roman baserad på bästsäljaren "Sapiens". Berättelsen om hur vi gick från vanliga
   apor till att bli härskare över planeten jorden, kapabla att klyva en atom, åka till månen och manipulera
   livets genetiska kod är fascinerande läsning, här skildrat med mycket humor.
-cover_url: covers/9789127172906.jpg
+cover_url: covers/9789127172906.webp
 source_url: http://libris.kb.se/bib/jwdn4kn8g1dnv2nc
 sources:
 - libris

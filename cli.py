@@ -182,12 +182,30 @@ def parse_libris_id(url_or_id):
     return path.rstrip("/").rsplit("/", 1)[-1]
 
 
+def resolve_libris_control_number(libris_id):
+    """Modern libris.kb.se URLs use an opaque id (e.g. "8sl1vz3l227gzhj") that
+    the legacy xsearch API doesn't index -- only the old numeric control
+    number does. Fetch the record's JSON-LD (plain HTML otherwise, behind a
+    bot-check) and pull the control number out of its "Record" node."""
+    req = urllib.request.Request(f"https://libris.kb.se/{libris_id}",
+                                  headers={"User-Agent": USER_AGENT, "Accept": "application/ld+json"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        data = json.loads(resp.read())
+    for node in data.get("@graph", []):
+        if node.get("controlNumber"):
+            return node["controlNumber"]
+    return None
+
+
 def fetch_libris_by_id(libris_id):
     """Look up one record directly by its Libris id ("onr" = object number)
     via xsearch, instead of the full JSON-LD record -- xsearch already
     resolves author names to clean strings, where the raw JSON-LD often only
     links to a separate, unfetched record for each contributor."""
-    body = http_get("https://libris.kb.se/xsearch", {"query": f"onr:{libris_id}", "format": "json", "n": 1})
+    onr = libris_id if libris_id.isdigit() else resolve_libris_control_number(libris_id)
+    if not onr:
+        return None
+    body = http_get("https://libris.kb.se/xsearch", {"query": f"onr:{onr}", "format": "json", "n": 1})
     items = json.loads(body)["xsearch"]["list"]
     return items[0] if items else None
 
@@ -984,6 +1002,58 @@ def cmd_set_hidden(args, hidden):
     print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
 
 
+COVER_WEBP_QUALITY = 82
+
+
+def convert_cover_to_webp(path):
+    """Convert one cover image in place to .webp. Returns the new file's
+    basename, or None if `path` was already .webp."""
+    if os.path.splitext(path)[1].lower() == ".webp":
+        return None
+    from PIL import Image
+    img = Image.open(path)
+    img = img.convert("RGBA" if img.mode in ("P", "RGBA", "LA") else "RGB")
+    new_path = os.path.splitext(path)[0] + ".webp"
+    img.save(new_path, "WEBP", quality=COVER_WEBP_QUALITY, method=6)
+    os.remove(path)
+    return os.path.basename(new_path)
+
+
+def cmd_optimize_covers(args):
+    """Convert cover images to .webp -- run with no arguments to sweep every
+    existing jpg/png in data/covers/, or pass specific file paths to convert
+    just-added covers before committing them."""
+    covers_dir = os.path.join(os.path.dirname(args.data) or ".", "covers")
+    if args.files:
+        targets = args.files
+    elif os.path.isdir(covers_dir):
+        targets = sorted(os.path.join(covers_dir, n) for n in os.listdir(covers_dir)
+                          if os.path.splitext(n)[1].lower() in (".jpg", ".jpeg", ".png"))
+    else:
+        targets = []
+
+    store = load_store(args.data)
+    by_cover_filename = {}
+    for book in store.values():
+        if book.get("cover_url"):
+            by_cover_filename.setdefault(os.path.basename(book["cover_url"]), []).append(book)
+
+    converted = 0
+    for path in targets:
+        old_name = os.path.basename(path)
+        new_name = convert_cover_to_webp(path)
+        if not new_name:
+            continue
+        converted += 1
+        for book in by_cover_filename.get(old_name, []):
+            book["cover_url"] = f"covers/{new_name}"
+
+    save_store(args.data, store)
+    print(f"Converted {converted} cover(s) to webp.")
+    if converted:
+        print("Run `python3 cli.py build` to refresh data/books.json for the UI.", file=sys.stderr)
+
+
 def cmd_build(args):
     build_json(args.data, args.json_out)
     print(f"Wrote {args.json_out}", file=sys.stderr)
@@ -1012,6 +1082,10 @@ def main():
         help="compile the per-book yaml files into data/books.json for the web UI (run this in CI after editing yaml)")
     p_build.add_argument("--json-out", default=JSON_OUTPUT_PATH, help="path to write the combined json file")
 
+    p_covers = sub.add_parser("optimize-covers",
+        help="convert cover images to .webp (no args: sweep all of data/covers/; or pass specific files)")
+    p_covers.add_argument("files", nargs="*", help="specific cover file(s) to convert, e.g. before committing")
+
     sub.add_parser("list", help="list all books in the index")
 
     p_hide = sub.add_parser("hide", help="hide a book from the UI")
@@ -1029,6 +1103,8 @@ def main():
         cmd_fetch_dates(args)
     elif args.command == "build":
         cmd_build(args)
+    elif args.command == "optimize-covers":
+        cmd_optimize_covers(args)
     elif args.command == "list":
         cmd_list(args)
     elif args.command == "hide":

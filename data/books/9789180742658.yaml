@@ -10,7 +10,7 @@ language: swe
 description: Marco Rotas kanske mest kända serie -Mitt liv i ett äggskal- är en fascinerande skildring
   över Kalle Ankas liv och leverne. Den berättar om Kalles uppväxt, från det han kläcktes ur ett ägg fram
   till dagens fartfyllda äventyr. Ett måste för alla ankfans!
-cover_url: covers/9789180742658.jpg
+cover_url: covers/9789180742658.webp
 source_url: http://libris.kb.se/bib/f02qpfmpczv44w9b
 sources:
 - libris

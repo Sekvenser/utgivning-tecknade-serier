@@ -10,7 +10,7 @@ language: swe
 description: Olivier Schrauwens andra bok på svenska, efter 2021 års ”Arsène Schrauwen”, är en samling
   science fiction-noveller. ”En bländande och desorienterande samling av noveller som beskriver författarens
   interaktioner med framtiden [...]" - Francoise Mouly, The New Yorker
-cover_url: covers/9789198759488.jpg
+cover_url: covers/9789198759488.webp
 source_url: http://libris.kb.se/bib/cszrzff59d6sh5v6
 sources:
 - libris

@@ -10,7 +10,7 @@ language: swe
 description: Fönsterruta är en enmans-antologi med ett antal berättelser som utspelar sig i en färgsprakande
   värld präglad av magiska under och äventyr. Den franska utgåvan belönades med ett pris för bästa debut
   vid den prestigefyllda seriefestivalen i Angoulême 2020.
-cover_url: covers/9789198585759.jpg
+cover_url: covers/9789198585759.webp
 source_url: http://libris.kb.se/bib/jvz77tkjgrbw61hb
 sources:
 - libris

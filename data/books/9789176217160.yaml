@@ -11,7 +11,7 @@ language: swe
 description: I bokserien Kalle Ankas legendariska äventyr samlar vi några av de allra bästa och mest minnesvärda
   Kalle Anka-serierna från det sena 1970-talet till det tidiga 2000-talet. Serierna är skrivna av de bästa
   manusförfattarna och tecknade av den skicklige stjärntecknaren Daniel Branca.
-cover_url: covers/9789176217160.jpg
+cover_url: covers/9789176217160.webp
 source_url: http://libris.kb.se/bib/1dwdqdxzz9vtlx1m
 sources:
 - libris

@@ -12,7 +12,7 @@ language: swe
 description: De bästsäljande serieskaparna Raina Telgemeier och Scott McCloud har gjort en rolig och inspirerande
   bok om sitt favoritämne om hur det går till att göra serier, som också ger många handfasta tips på hur
   man tecknar och kommer i gång med ett kreativt projekt.
-cover_url: covers/9789175154855.jpg
+cover_url: covers/9789175154855.webp
 source_url: http://libris.kb.se/bib/rbd944f5pbwt237v
 sources:
 - grandocean

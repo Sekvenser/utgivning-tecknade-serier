@@ -40,6 +40,8 @@ None of the sources above expose a day-level publication date — Libris and Gra
 python3 cli.py list            # print all books, newest first
 python3 cli.py hide <id>       # hide a book from the UI (id = isbn, or the id shown by `list`)
 python3 cli.py unhide <id>
+python3 cli.py optimize-covers            # convert every non-webp file in data/covers/ to .webp
+python3 cli.py optimize-covers <file...>  # convert just the given file(s), e.g. before committing a new cover
 ```
 
 Books whose publisher mentions "MTM" (Myndigheten för tillgängliga medier, the Swedish agency for accessible/talking-book media) are hidden automatically when first added — they're accessible-media reissues, not original releases. `unhide` still works on them like any other book if you want one visible.
@@ -82,13 +84,13 @@ The same push also runs `.github/workflows/release.yml`, which creates a GitHub 
 
 Each book is one file under `data/books/<id>.yaml` — the source of truth, meant to be committed to git. Editing, hiding, or updating one book touches only its own file, so a git diff shows exactly what changed instead of a rewrite of one giant array. `python3 cli.py build` compiles all of them into `data/books.json`, which is gitignored (a generated artifact, not source) and is what `web/app.js` actually fetches.
 
-Cover images are downloaded into `data/covers/` during `update` (skipped if already present) so the UI never depends on external image hosts.
+Cover images are downloaded into `data/covers/` during `update` (skipped if already present) so the UI never depends on external image hosts. Covers are kept as `.webp` to save space — `cli.py optimize-covers` converts any `.jpg`/`.png` in `data/covers/` (or specific files you pass it) to `.webp` in place and rewrites the matching `cover_url` in yaml. It doesn't run automatically as part of `update`, since freshly scraped covers are already reasonably-sized jpegs; it exists for the one-time bulk cleanup and for converting hand-added covers before a commit (see README.md's contribution guide). Requires `Pillow`.
 
 Two link fields are hand-curated rather than scraped — add `more_info_url` and/or `buy_url` directly to a book's yaml file (e.g. a homepage or the publisher's own web shop) and they'll show up as "Mer information" / "Köp" links on that book's page after the next `build`. When `buy_url` is set it renders first, as a standout button (it's the recommended way to get the book), above the plain text links.
 
 `render_book_detail_html()` also shows a "Hitta" group of links to five bookstore sites (Bokus, Adlibris, Bokbörsen, Serier & Sånt, Seriekatalogen), computed at build time by `title_search_urls()` from the book's `isbn`/`title` — pure functions of data already in the yaml, so they are never stored as fields and never need backfilling; only `more_info_url`/`buy_url` are hand-curated in the yaml itself.
 
-Requires `PyYAML` (`pip install -r requirements.txt`).
+Requires `PyYAML` and `Pillow` (`pip install -r requirements.txt`).
 
 ## Known limitations
 

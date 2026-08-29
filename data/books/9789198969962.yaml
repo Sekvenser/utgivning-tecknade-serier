@@ -10,7 +10,7 @@ language: swe
 description: När stjärnorna sprider sig på himlen är en rikt illustrerad grafisk roman i färg som handlar
   om att växa upp i ett flyktingläger. Vi får följa Omar och hans yngre bror Hassan som lever i flyktinglägret
   Dadaab i Kenya. De är föräldralösa och kan inte återvända till hemlandet Somalia där kriget pågår.
-cover_url: covers/bokinfo_9789198969962.jpg
+cover_url: covers/bokinfo_9789198969962.webp
 source_url: http://libris.kb.se/bib/vgnhtgz3svwfjlqw
 sources:
 - libris

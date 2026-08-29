@@ -10,7 +10,7 @@ published_date: '2023-04-03'
 language: swe
 description: Detta är Hergés första seriealbum om journalisten Tintin. Det har tidigare bara givits ut
   på svenska i svartvitt, men föreligger här i en färglagd utgåva.
-cover_url: covers/9789180580250.jpg
+cover_url: covers/9789180580250.webp
 source_url: http://libris.kb.se/bib/5mm5wlvn3nb17z67
 sources:
 - libris

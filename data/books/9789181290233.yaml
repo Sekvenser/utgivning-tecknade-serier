@@ -9,7 +9,7 @@ language: swe
 description: Djupt inne i dödskallegrottan ligger krönikerummet, där fantome-ätten har skrivit ner sina
   livsöden - detta är deras historia. I bokserien Fantomens historiska äventyr får vi i kronologisk ordning
   möta en fantom i varje ny utgåva, från den förste Fantomen fram till den 20e.
-cover_url: covers/bokinfo_9789181290233.jpg
+cover_url: covers/bokinfo_9789181290233.webp
 source_url: http://libris.kb.se/bib/4r2r05092kpvwgmr
 sources:
 - libris

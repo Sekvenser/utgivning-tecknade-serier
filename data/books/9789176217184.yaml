@@ -10,7 +10,7 @@ language: swe
 description: 'Frida är tuffare än tåget: Inget skrämmer henne, inte ens monstren som besöker henne om
   nätterna och spelar banjo och blockflöjt. Därför vänder sig monstren till Frida när deras land är fångat
   i en evig vinter och behöver räddas.'
-cover_url: covers/9789176217184.jpg
+cover_url: covers/9789176217184.webp
 source_url: http://libris.kb.se/bib/w8l6vc8wtm6glckf
 sources:
 - libris

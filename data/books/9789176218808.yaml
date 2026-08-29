@@ -11,7 +11,7 @@ language: swe
 description: I bokserien Kalle Anka Legendariska äventyr är några av de allra bästa och mest minnesvärda
   Kalle Anka-serierna samlade, från det sena 1970-talet till det tidiga 2000-talet. Serierna är skrivna
   av de bästa manusförfattarna och tecknade av den skicklige tecknaren Daniel Branca.
-cover_url: covers/9789176218808.jpg
+cover_url: covers/9789176218808.webp
 source_url: http://libris.kb.se/bib/wb5pp91wtxpqq6r7
 sources:
 - libris

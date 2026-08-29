@@ -10,7 +10,7 @@ language: swe
 description: Monster är en annorlunda grafisk roman där allt har vänts uppochner. Där det vi betraktar
   som mystiskt och spännande är det vanliga och trygga, medan det het vardagliga betraktas med misstänksamhet
   och rädsla.
-cover_url: covers/bokinfo_9789172269415.jpg
+cover_url: covers/bokinfo_9789172269415.webp
 source_url: http://libris.kb.se/bib/3q59mf1v1bhd5fsf
 sources:
 - libris

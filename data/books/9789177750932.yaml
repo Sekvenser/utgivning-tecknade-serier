@@ -10,7 +10,7 @@ language: swe
 description: Sara Granér är tillbaka med en samling bilder som hon gjort under rubriken Dagens ord. Allas
   lika mellangärde är en vacker, sorglig, rolig och löjlig bok. Skämta med ord kan de flesta göra, men
   Saras Granér lyckas höja den ofta bespottade pappa-humorn till en helt ny nivå.
-cover_url: covers/9789177750932.jpg
+cover_url: covers/9789177750932.webp
 source_url: http://libris.kb.se/bib/hsh93gztf6bfh0zk
 sources:
 - libris

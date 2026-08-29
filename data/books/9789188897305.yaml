@@ -10,7 +10,7 @@ language: swe
 description: Denna samlingsutgåva i sex delar innehåller samtliga Gaston-serier i kronologisk ordning,
   med ny färgläggning och textning och i nyöversättning av Björn Wahlberg. I varje volym ingår också ett
   fylligt extramaterial som berättar bakgrundshistorien om Gaston och hans värld.
-cover_url: covers/9789188897305.jpg
+cover_url: covers/9789188897305.webp
 source_url: http://libris.kb.se/bib/6jn3gct04n8f9vkv
 sources:
 - libris

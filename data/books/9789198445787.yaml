@@ -9,7 +9,7 @@ language: swe
 description: Nosebleed Studio reser i den svenska historien är en serieantologi i mangastil med tre berättelser
   på temat “resor i svenska historien”. Serierna är baserade på historiska efterforskningar men är i varierande
   grad återberättelser.
-cover_url: covers/9789198445787.jpg
+cover_url: covers/9789198445787.webp
 source_url: http://libris.kb.se/bib/htn108qqfxjgqrj6
 sources:
 - libris

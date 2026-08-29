@@ -11,7 +11,7 @@ language: swe
 description: Följ med på en fantastisk resa i magins värld. Perfekt för såväl ankfans som fantasyfans! I
   den här helt nya fantasyserien är det Magica de Hex som spelar huvudrollen, och hon är redo att visa
   världen sina sanna krafter, även om de kanske inte är så hemska som förväntat.
-cover_url: covers/9789180740418.jpg
+cover_url: covers/9789180740418.webp
 source_url: http://libris.kb.se/bib/q6gm01bwn0sw0nnq
 sources:
 - libris
