@@ -14,10 +14,11 @@ description: Alice, som älskar att rita, börjar äntligen på en ny konstskola
   – särskilt biblioteket, där bibliotekarien verkar som en zombie och assistenten Tio nästan som en vampyr.
   Allt förändras när de upptäcker skolans hemliga underjordiska gångar och ett rum för märkliga ritualer.
   Kan skolan styras av vampyrer? Och vad vill de egentligen?
-cover_url: covers/9789181290370.webp
+cover_url: covers/9789181290370.jpg
 source_url: https://www.grandocean.se/shop/12-barn/12179-vampyrbiblioteket/
 sources:
 - grandocean
+- libris
 grandocean_id: 12179
 hidden: false
 added_at: '2026-08-25T15:00:24+00:00'
