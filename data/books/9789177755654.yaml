@@ -3,6 +3,7 @@ isbn: '9789177755654'
 title: Lord All Smitey
 authors:
 - Vårhed, Cecilia
+- Vårhed, Cecilia, 1996-
 publisher: Ordfront
 year: 2026
 published: '2026'
@@ -33,6 +34,7 @@ cover_url: covers/9789177755654.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12208-lord-all-smitey/
 sources:
 - grandocean
+- libris
 grandocean_id: 12208
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
