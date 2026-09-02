@@ -10,7 +10,7 @@ language: eng, swe
 description: 'Konungarikets förbannelse är en illustrerad fornnordisk saga där häxor, krigare, vålnader
   och troll kämpar om att härska över Gautaland. En actionfylld upplevelse, baserad på Skandinaviens mest
   lovprisade runmonument: Rök-stenen!'
-cover_url: ''
+cover_url: 'covers/kingdom-curse.webp'
 source_url: http://libris.kb.se/bib/h444mw0cf25bfms6
 sources:
 - libris
