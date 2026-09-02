@@ -685,6 +685,7 @@ def render_book_detail_html(book):
 
 
 BOOK_META_TEMPLATE = """<title>{title}</title>
+<link rel="canonical" href="{canonical_url}">
 <meta name="description" content="{description}">
 
 <meta property="og:type" content="book">
