@@ -3,6 +3,7 @@ isbn: '9789177755661'
 title: Johan smakar på livet
 authors:
 - Wanloo, Johan
+- Wanloo, Johan, 1972-
 publisher: Ordfront
 year: 2026
 published: '2026'
@@ -23,6 +24,7 @@ cover_url: covers/9789177755661.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12134-johan-smakar-paa-livet/
 sources:
 - grandocean
+- libris
 grandocean_id: 12134
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
