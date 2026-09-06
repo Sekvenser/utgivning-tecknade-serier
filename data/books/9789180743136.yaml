@@ -3,14 +3,16 @@ isbn: '9789180743136'
 title: Kalle Anka gigant
 authors:
 - Bergström, Anna
+- Disney
 publisher: '[Malmö] : Story House Egmont'
 year: 2026
 published: '2026'
 language: swe
 description: ''
-cover_url: covers/9789180743136.webp
+cover_url: covers/9789180743136.jpg
 source_url: http://libris.kb.se/bib/k55sk73qhfdbfvts
 sources:
+- grandocean
 - libris
 hidden: false
 added_at: '2026-08-24T14:44:26+00:00'
