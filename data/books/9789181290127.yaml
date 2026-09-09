@@ -1,7 +1,8 @@
 id: '9789181290127'
 isbn: '9789181290127'
 title: Kalle Anka - Klassiska katastrofer 2
-authors: []
+authors:
+- Disney
 publisher: Egmont Story House
 year: 2026
 published: '2026'
@@ -10,9 +11,10 @@ description: I bokserien Kalle Anka Klassiska katastrofer samlar vi några av de
   Kalle Anka-serierna från det tidiga 2000-talet. Serierna är skrivna av de bästa manusförfattarna och
   har det gemensamt att de är tecknade av den skicklige stjärntecknaren Vicar. Bokserien innehåller tio
   lyxiga böcker, en samling för nyblivna läsare såväl som för inbitna fans.
-cover_url: covers/bokinfo_9789181290127.webp
+cover_url: covers/9789181290127.jpg
 source_url: http://libris.kb.se/bib/zlm275hhwxhtdn7g
 sources:
+- grandocean
 - libris
 hidden: false
 added_at: '2026-08-28T08:55:27+00:00'
