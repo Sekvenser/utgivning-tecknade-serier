@@ -3,6 +3,7 @@ isbn: '9789181290424'
 title: Asterix tolv stordåd
 authors:
 - Goscinny, René
+- Goscinny, René, 1926-1977
 - Uderzo, Albert
 publisher: Egmont
 year: 2026
@@ -15,6 +16,7 @@ cover_url: covers/9789181290424.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12160-asterix-tolv-stordaad/
 sources:
 - grandocean
+- libris
 grandocean_id: 12160
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
