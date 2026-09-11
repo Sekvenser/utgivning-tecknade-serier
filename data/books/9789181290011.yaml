@@ -3,6 +3,7 @@ isbn: '9789181290011'
 title: Fantomen - Kampen mot Singhpiraterna
 authors:
 - Falk, Lee
+- Falk, Lee, 1911-1999
 - Moore, Ray
 publisher: Egmont
 year: 2026
@@ -15,6 +16,7 @@ cover_url: covers/9789181290011.jpg
 source_url: https://www.grandocean.se/shop/10-allaalders/12161-fantomen---kampen-mot-singhpiraterna/
 sources:
 - grandocean
+- libris
 grandocean_id: 12161
 hidden: false
 added_at: '2026-08-25T15:00:24+00:00'
