@@ -2,6 +2,7 @@ id: '9789198791211'
 isbn: '9789198791211'
 title: Immortal Guardian - Aegis · 1
 authors:
+- Engholm, Viktor
 - Engholm, Viktor, 1991-
 publisher: '[Malmö] : Nosebleed Studio'
 year: 2026
@@ -12,9 +13,10 @@ description: 'Immortal Guardian: AEGIS är en actionserie av Viktor Engholm. Mä
   attack av de fasansfulla Titanerna- monster som endast kan bli besegrade med den senaste tekniken från
   företaget KRONOS - AEGIS, pilotstyrda jätterobotar! Vi följer Mira som drömmer om att bli pilot och
   hennes kamp för att skydda mänskligheten! Detta är första boken i serien.'
-cover_url: covers/9789198791211.webp
+cover_url: covers/9789198791211.jpg
 source_url: http://libris.kb.se/bib/4r3wj41t2q0p0xbq
 sources:
+- grandocean
 - libris
 hidden: false
 added_at: '2026-08-24T14:44:26+00:00'
