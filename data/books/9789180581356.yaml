@@ -3,6 +3,7 @@ isbn: '9789180581356'
 title: Jag, Fadi, del 1
 authors:
 - Sattouf, Riad
+- Sattouf, Riad, 1978-
 publisher: Cobolt
 year: 2026
 published: '2026'
@@ -22,6 +23,7 @@ cover_url: covers/9789180581356.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12142-jag-fadi-del-1/
 sources:
 - grandocean
+- libris
 grandocean_id: 12142
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
