@@ -3,6 +3,7 @@ isbn: '9789523337183'
 title: Stilla vatten
 authors:
 - Hammar, Edith
+- Hammar, Edith, 1992-
 publisher: Förlaget M
 year: 2026
 published: '2026'
@@ -19,6 +20,7 @@ cover_url: covers/9789523337183.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12183-stilla-vatten/
 sources:
 - grandocean
+- libris
 grandocean_id: 12183
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'

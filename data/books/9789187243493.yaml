@@ -3,6 +3,7 @@ isbn: '9789187243493'
 title: Grop
 authors:
 - Svetoft, Erik
+- Svetoft, Erik, 1988-
 publisher: Sanatorium
 year: 2026
 published: '2026'
@@ -15,6 +16,7 @@ cover_url: covers/9789187243493.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12264-grop/
 sources:
 - grandocean
+- libris
 grandocean_id: 12264
 hidden: false
 added_at: '2026-09-17T20:17:35+00:00'

@@ -1,7 +1,8 @@
 id: '9789181290479'
 isbn: '9789181290479'
 title: Stål-Kalle Presenterar - Fantomius
-authors: []
+authors:
+- Gervasio, Marco
 publisher: Egmont
 year: 2026
 published: '2026'
@@ -15,6 +16,7 @@ cover_url: covers/9789181290479.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12127-staal-kalle-presenterar---fantomius/
 sources:
 - grandocean
+- libris
 grandocean_id: 12127
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'

@@ -3,6 +3,7 @@ isbn: '9789113147895'
 title: Den rödaste rosen slår ut
 authors:
 - Strömquist, Liv
+- Strömquist, Liv, 1978-
 publisher: Norstedts
 year: 2026
 published: '2026'
@@ -23,10 +24,11 @@ description: 'Leonardo DiCaprio har dejtat femtioelva svinsnygga modeller men bl
   att hitta kärleken har aldrig varit mer aktuell. Denna utgåva innehåller ett nyskrivet kapitel om vår
   hierarkiska och prestationsfixerade samtid, och om hur manosfärens framväxt gör det ännu svårare för
   oss att älska varandra.'
-cover_url: covers/9789113147895.webp
+cover_url: covers/9789113147895.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12155-den-rodaste-rosen-slaar-ut/
 sources:
 - grandocean
+- libris
 grandocean_id: 12155
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
