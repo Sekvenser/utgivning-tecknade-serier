@@ -3,6 +3,7 @@ isbn: '9789523337190'
 title: Mumintrollet - Samlade serier 3
 authors:
 - Jansson, Tove
+- Jansson, Tove, 1914-2001
 publisher: Förlaget M
 year: 2026
 published: '2026'
@@ -25,6 +26,7 @@ cover_url: covers/9789523337190.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12132-mumintrollet---samlade-serier-3/
 sources:
 - grandocean
+- libris
 grandocean_id: 12132
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
