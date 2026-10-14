@@ -3,6 +3,7 @@ isbn: '9789175155234'
 title: Vi ses på återvinningen
 authors:
 - Berglin, Jan & Maria
+- Berglin, Jan, 1960-
 publisher: Kartago
 year: 2026
 published: '2026'
@@ -21,6 +22,7 @@ cover_url: covers/9789175155234.jpg
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12136-vi-ses-paa-aatervinningen/
 sources:
 - grandocean
+- libris
 grandocean_id: 12136
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
