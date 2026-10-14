@@ -2,6 +2,7 @@ id: '9789198866384'
 isbn: '9789198866384'
 title: Den kompletta Kapten Grogg
 authors:
+- Bergdahl, Victor, 1878-1939
 - Bergdahl, Viktor
 publisher: '[Malmö] : Seriearkivet'
 year: 2026
@@ -17,6 +18,8 @@ description: Kapten Grogg var en banbrytande svit tecknade svenska kortfilmer fr
   i Musse Pigg-tidningen 1937–1938. Boken innehåller dessutom ett faktaspäckat förord som sätter filmerna
   och serierna i en historisk kontext.
 cover_url: covers/9789198866384.webp
+source_url: http://libris.kb.se/bib/wjrtn2zjtkp458h7
 buy_url: https://www.seriearkivet.se/product/seriearkivet-presenterar-bok-3-den-kompletta-kapten-grogg/
-sources: []
+sources:
+- libris
 hidden: false

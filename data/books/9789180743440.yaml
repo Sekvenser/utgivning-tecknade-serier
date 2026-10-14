@@ -1,15 +1,17 @@
 id: '9789180743440'
 isbn: '9789180743440'
 title: 'Kalle Ankas pocket 588 : Uppdrag måne'
-authors: []
+authors:
+- Disney
 publisher: Egmont Story House
 year: 2026
 published: '2026'
 language: swe
 description: ''
-cover_url: covers/bokinfo_9789180743440.webp
+cover_url: covers/9789180743440.png
 source_url: http://libris.kb.se/bib/d106kj05b8tcg6dj
 sources:
+- grandocean
 - libris
 hidden: false
 added_at: '2026-08-28T09:07:36+00:00'
