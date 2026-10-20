@@ -3,6 +3,7 @@ isbn: '9789190196014'
 title: Viktor Kasparsson Vägs ände
 authors:
 - Gustafsson, Dennis
+- Gustafsson, Dennis, 1969-
 publisher: Albumförlaget
 year: 2026
 published: '2026'
@@ -15,6 +16,7 @@ cover_url: covers/9789190196014.jpg
 source_url: https://www.grandocean.se/shop/9-vuxen/12273-viktor-kasparsson-vags-ande/
 sources:
 - grandocean
+- libris
 grandocean_id: 12273
 hidden: false
 added_at: '2026-10-07T05:02:01+00:00'

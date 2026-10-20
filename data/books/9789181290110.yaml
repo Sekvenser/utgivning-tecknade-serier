@@ -3,6 +3,7 @@ isbn: '9789181290110'
 title: Kalle Anka - Klassiska katastrofer 1
 authors:
 - Disney
+- Vicar, 1934-
 publisher: Egmont
 year: 2026
 published: '2026'
@@ -15,6 +16,7 @@ cover_url: covers/9789181290110.png
 source_url: https://www.grandocean.se/shop/21-paa-gaang/12225-kalle-anka---klassiska-katastrofer-1/
 sources:
 - grandocean
+- libris
 grandocean_id: 12225
 hidden: false
 added_at: '2026-08-24T14:45:17+00:00'
